@@ -1,471 +1,612 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PassGuard Pro — Password Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>PassGuard Pro — Password Intelligence Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ── THEME TOKENS ── */
 :root {
-  --bg:#f0f4ff;
-  --bg2:#e8edf9;
-  --surface:#ffffff;
-  --surface2:#f7f9ff;
-  --surface3:#eef1fa;
-  --border:#e0e6f0;
-  --border2:#cdd5e8;
-  --text:#0d1526;
-  --text2:#3d4f6e;
-  --text3:#7a8caa;
-  --accent:#2563eb;
-  --accent2:#1d4ed8;
-  --accent-bg:#eff4ff;
-  --accent-border:#bfcffd;
-  --green:#059669;
-  --green-bg:#ecfdf5;
-  --green-border:#a7f3d0;
-  --yellow:#d97706;
-  --yellow-bg:#fffbeb;
-  --yellow-border:#fde68a;
-  --red:#dc2626;
-  --red-bg:#fef2f2;
-  --red-border:#fecaca;
-  --orange:#ea580c;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:0 4px 20px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04);
-  --shadow-lg:0 20px 60px rgba(0,0,0,.1),0 8px 24px rgba(0,0,0,.06);
-  --shadow-glow:0 0 0 3px rgba(37,99,235,.15);
-  --r:12px;--r-sm:8px;--r-lg:18px;--r-xl:24px;
-  --font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+  --bg:#07090f;
+  --bg2:#0b0e18;
+  --surface:#0f1322;
+  --surface2:#141828;
+  --surface3:#1a2035;
+  --border:#1e2640;
+  --border2:#252e4a;
+  --text:#e2e8f8;
+  --text2:#8896b3;
+  --text3:#4a5878;
+  --accent:#4f8ef7;
+  --accent2:#2563eb;
+  --accent-glow:rgba(79,142,247,.18);
+  --accent-border:rgba(79,142,247,.3);
+  --green:#22d3a0;
+  --green-bg:rgba(34,211,160,.1);
+  --green-border:rgba(34,211,160,.25);
+  --yellow:#f59e0b;
+  --yellow-bg:rgba(245,158,11,.1);
+  --yellow-border:rgba(245,158,11,.25);
+  --red:#f43f5e;
+  --red-bg:rgba(244,63,94,.1);
+  --red-border:rgba(244,63,94,.25);
+  --orange:#fb923c;
+  --purple:#a78bfa;
+  --r:10px;--r-sm:7px;--r-lg:16px;--r-xl:22px;
+  --font:'Syne',sans-serif;
+  --body:'Inter',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --shadow-sm:0 1px 4px rgba(0,0,0,.4);
+  --shadow-md:0 4px 24px rgba(0,0,0,.5);
+  --shadow-lg:0 16px 60px rgba(0,0,0,.6);
+  --glow-accent:0 0 30px rgba(79,142,247,.15);
 }
-[data-theme="dark"] {
-  --bg:#080d1a;--bg2:#0d1526;
-  --surface:#111827;--surface2:#1a2236;--surface3:#1e2840;
-  --border:#1e2d47;--border2:#263552;
-  --text:#e8edf8;--text2:#94a8c8;--text3:#4a607e;
-  --accent:#3b82f6;--accent2:#60a5fa;
-  --accent-bg:rgba(59,130,246,.12);--accent-border:rgba(59,130,246,.25);
-  --green:#10b981;--green-bg:rgba(16,185,129,.1);--green-border:rgba(16,185,129,.25);
-  --yellow:#f59e0b;--yellow-bg:rgba(245,158,11,.1);--yellow-border:rgba(245,158,11,.25);
-  --red:#ef4444;--red-bg:rgba(239,68,68,.1);--red-border:rgba(239,68,68,.25);
-  --shadow-sm:0 1px 3px rgba(0,0,0,.3);--shadow-md:0 4px 20px rgba(0,0,0,.4);
-  --shadow-lg:0 20px 60px rgba(0,0,0,.5);
+[data-theme="light"] {
+  --bg:#f4f6fc;--bg2:#ebeef8;
+  --surface:#ffffff;--surface2:#f8faff;--surface3:#eef1fa;
+  --border:#dde3f0;--border2:#c8d0e8;
+  --text:#0d1526;--text2:#3d4f70;--text3:#7a8faa;
+  --accent:#2563eb;--accent2:#1d4ed8;
+  --accent-glow:rgba(37,99,235,.1);--accent-border:rgba(37,99,235,.25);
+  --green:#059669;--green-bg:rgba(5,150,105,.08);--green-border:rgba(5,150,105,.2);
+  --yellow:#d97706;--yellow-bg:rgba(217,119,6,.08);--yellow-border:rgba(217,119,6,.2);
+  --red:#e11d48;--red-bg:rgba(225,29,72,.08);--red-border:rgba(225,29,72,.2);
+  --shadow-sm:0 1px 4px rgba(0,0,0,.07);--shadow-md:0 4px 24px rgba(0,0,0,.09);
+  --shadow-lg:0 16px 60px rgba(0,0,0,.12);--glow-accent:0 0 20px rgba(37,99,235,.08);
 }
 
 html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;line-height:1.5}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s;line-height:1.55;-webkit-font-smoothing:antialiased}
 
-/* ── LAYOUT ── */
-.app{display:flex;flex-direction:column;min-height:100vh}
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+
+/* ── GRADIENT MESH ── */
+.mesh{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.mesh-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.12}
+[data-theme="light"] .mesh-orb{opacity:.07}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,#4f8ef7,transparent);top:-100px;left:-100px;animation:orbFloat1 18s ease-in-out infinite}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#a78bfa,transparent);bottom:-80px;right:-80px;animation:orbFloat2 22s ease-in-out infinite}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,#22d3a0,transparent);top:40%;left:55%;animation:orbFloat3 16s ease-in-out infinite}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-30px)}}
+@keyframes orbFloat3{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-50px)}}
+
+/* ── APP SHELL ── */
+.app{position:relative;z-index:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* ── TOPBAR ── */
 .topbar{
-  position:sticky;top:0;z-index:100;
-  background:var(--surface);border-bottom:1px solid var(--border);
-  padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;
-  box-shadow:var(--shadow-sm);backdrop-filter:blur(12px);
+  position:sticky;top:0;z-index:200;
+  background:rgba(7,9,15,.85);border-bottom:1px solid var(--border);
+  padding:0 28px;height:62px;display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
-.brand{display:flex;align-items:center;gap:10px}
-.brand-icon{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(37,99,235,.35)}
-.brand-icon svg{width:17px;height:17px}
-.brand-name{font-size:18px;font-weight:800;letter-spacing:-.4px}
-.brand-name span{color:var(--accent)}
-.topbar-right{display:flex;align-items:center;gap:8px}
-.theme-btn{
-  width:36px;height:36px;border-radius:8px;border:1px solid var(--border);
-  background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;
-  color:var(--text2);transition:all .2s;
+[data-theme="light"] .topbar{background:rgba(244,246,252,.88)}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer}
+.brand-mark{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,#4f8ef7,#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(79,142,247,.4);
 }
-.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-.nav-tabs{display:flex;gap:2px;background:var(--surface3);border-radius:10px;padding:3px}
+.brand-mark svg{width:18px;height:18px}
+.brand-name{font-family:var(--font);font-size:17px;font-weight:800;letter-spacing:-.3px}
+.brand-name em{font-style:normal;color:var(--accent)}
+.brand-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:var(--accent-glow);color:var(--accent);border:1px solid var(--accent-border);letter-spacing:.5px;margin-left:4px}
+
+.topbar-center{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:3px}
+@media(max-width:820px){.topbar-center{display:none}}
 .nav-tab{
-  padding:6px 14px;border:none;background:transparent;border-radius:8px;
-  font-family:var(--font);font-size:13px;font-weight:600;color:var(--text3);
-  cursor:pointer;transition:all .2s;white-space:nowrap;
+  padding:7px 15px;border:none;background:transparent;border-radius:9px;
+  font-family:var(--font);font-size:12.5px;font-weight:600;color:var(--text3);
+  cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.1px;
 }
-.nav-tab.active{background:var(--surface);color:var(--accent);box-shadow:var(--shadow-sm)}
+.nav-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}
+.nav-tab:hover:not(.active){color:var(--text2)}
+
+.topbar-right{display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:38px;height:38px;border-radius:9px;border:1px solid var(--border);
+  background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--text3);transition:all .2s;
+}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+
+/* ── MOBILE NAV ── */
+.mobile-nav{
+  display:none;gap:2px;overflow-x:auto;padding:8px 16px;
+  background:var(--surface);border-bottom:1px solid var(--border);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.mobile-nav::-webkit-scrollbar{display:none}
+@media(max-width:820px){.mobile-nav{display:flex}}
+.mobile-nav .nav-tab{flex-shrink:0;font-size:12px;padding:6px 13px}
 
 /* ── MAIN ── */
-.main{flex:1;padding:32px 24px;max-width:1100px;margin:0 auto;width:100%}
+.main{flex:1;padding:36px 28px;max-width:1140px;margin:0 auto;width:100%}
+@media(max-width:600px){.main{padding:20px 16px}}
 
 /* ── PAGES ── */
-.page{display:none}.page.active{display:block}
+.page{display:none;animation:fadeUp .35s ease both}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── ANALYZER PAGE ── */
-.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-@media(max-width:760px){.analyzer-grid{grid-template-columns:1fr}}
+/* ── HERO (landing) ── */
+.hero{text-align:center;padding:60px 20px 48px;max-width:640px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;background:var(--accent-glow);border:1px solid var(--accent-border);color:var(--accent);font-size:12px;font-weight:600;margin-bottom:24px;letter-spacing:.3px}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.hero-title{font-family:var(--font);font-size:clamp(38px,6vw,64px);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:18px}
+.hero-title span{background:linear-gradient(135deg,var(--accent),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--text2);line-height:1.7;margin-bottom:36px;max-width:500px;margin-left:auto;margin-right:auto}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  padding:14px 28px;border:none;border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--purple));
+  color:#fff;font-family:var(--font);font-size:15px;font-weight:700;
+  cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(79,142,247,.35);
+  display:flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(79,142,247,.45)}
+.btn-secondary{
+  padding:14px 24px;border:1px solid var(--border2);border-radius:10px;
+  background:var(--surface);color:var(--text2);
+  font-family:var(--font);font-size:15px;font-weight:600;
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{display:flex;gap:32px;justify-content:center;margin-top:40px;padding-top:40px;border-top:1px solid var(--border)}
+.hero-stat-val{font-family:var(--font);font-size:26px;font-weight:800;color:var(--text);margin-bottom:2px}
+.hero-stat-lbl{font-size:12px;color:var(--text3);font-weight:500}
+
+/* ── SECTION HEADER ── */
+.sec-head{margin-bottom:28px}
+.sec-title{font-family:var(--font);font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px}
+.sec-sub{font-size:13px;color:var(--text3)}
 
 /* ── CARDS ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-md);overflow:hidden}
-.card-head{padding:20px 24px 0;display:flex;align-items:center;justify-content:space-between}
-.card-title{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
-.card-title .icon{width:28px;height:28px;border-radius:7px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;color:var(--accent)}
-.card-body{padding:20px 24px 24px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-sm);overflow:hidden}
+.card-head{padding:18px 22px 0;display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;font-family:var(--font);letter-spacing:.1px;color:var(--text2)}
+.card-icon{width:26px;height:26px;border-radius:7px;background:var(--accent-glow);display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.card-body{padding:16px 22px 22px}
 
-/* ── PASSWORD INPUT ZONE ── */
-.pass-zone{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow-md);padding:24px;margin-bottom:24px}
-.pass-zone-title{font-size:22px;font-weight:800;margin-bottom:4px;letter-spacing:-.4px}
-.pass-zone-sub{font-size:13px;color:var(--text3);margin-bottom:20px}
-.pass-input-wrap{position:relative;margin-bottom:16px}
+/* ── ANALYZER ── */
+.analyzer-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+@media(max-width:760px){.analyzer-grid{grid-template-columns:1fr}}
+
+.pass-zone{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);box-shadow:var(--shadow-md);padding:28px;margin-bottom:24px;position:relative;overflow:hidden}
+.pass-zone::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--purple),var(--green));opacity:.6}
+.pass-zone-title{font-family:var(--font);font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-.4px}
+.pass-zone-sub{font-size:13px;color:var(--text3);margin-bottom:22px}
+
+.pass-input-wrap{position:relative;margin-bottom:18px}
 .pass-input{
-  width:100%;padding:16px 52px 16px 18px;
-  border:2px solid var(--border);border-radius:var(--r);
+  width:100%;padding:16px 56px 16px 20px;
+  border:1.5px solid var(--border2);border-radius:var(--r);
   background:var(--surface2);color:var(--text);
-  font-family:var(--mono);font-size:16px;
+  font-family:var(--mono);font-size:15px;
   outline:none;transition:all .2s;letter-spacing:.5px;
 }
-.pass-input:focus{border-color:var(--accent);background:var(--surface);box-shadow:var(--shadow-glow)}
-.pass-input::placeholder{font-family:var(--font);letter-spacing:0;color:var(--text3)}
+.pass-input:focus{border-color:var(--accent);background:var(--surface3);box-shadow:0 0 0 3px var(--accent-glow)}
+.pass-input::placeholder{font-family:var(--body);letter-spacing:0;color:var(--text3);font-size:14px}
 .pass-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);transition:color .2s;padding:4px}
 .pass-eye:hover{color:var(--accent)}
 
-/* ── BIG METER ── */
+/* Strength meter */
 .meter-wrap{margin-bottom:20px}
-.meter-track{height:10px;background:var(--surface3);border-radius:5px;overflow:hidden;margin-bottom:10px;border:1px solid var(--border)}
-.meter-fill{height:100%;border-radius:5px;transition:width .5s cubic-bezier(.4,0,.2,1),background .4s ease;width:0%}
+.meter-track{height:8px;background:var(--surface3);border-radius:4px;overflow:visible;margin-bottom:10px;position:relative}
+.meter-fill{height:100%;border-radius:4px;transition:width .55s cubic-bezier(.4,0,.2,1),background .4s;width:0%;position:relative}
+.meter-fill::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:inherit;box-shadow:0 0 8px currentColor;opacity:0;transition:opacity .3s}
+.meter-fill.has-val::after{opacity:1}
 .meter-labels{display:flex;justify-content:space-between;align-items:center}
-.meter-label{font-size:15px;font-weight:700}
+.meter-label{font-family:var(--font);font-size:15px;font-weight:700}
 .meter-score{font-size:12px;font-family:var(--mono);color:var(--text3)}
 
-/* ── STATS ROW ── */
+/* Stats row */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;text-align:center}
-.stat-val{font-size:18px;font-weight:800;font-family:var(--mono);margin-bottom:2px}
-.stat-lbl{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.8px}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:13px 14px;text-align:center;transition:border-color .2s}
+.stat-box:hover{border-color:var(--border2)}
+.stat-val{font-family:var(--font);font-size:18px;font-weight:800;margin-bottom:2px}
+.stat-lbl{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:1px}
 
-/* ── CRACK TIME ── */
+/* Crack banner */
 .crack-banner{
-  background:var(--accent-bg);border:1px solid var(--accent-border);
+  background:var(--surface2);border:1px solid var(--border);
   border-radius:var(--r);padding:14px 16px;
-  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  display:flex;align-items:center;gap:14px;
 }
-.crack-icon{width:36px;height:36px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.crack-label{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
-.crack-val{font-size:15px;font-weight:700;font-family:var(--mono);color:var(--accent)}
+.crack-icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(79,142,247,.3)}
+.crack-label{font-size:10px;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.crack-val{font-family:var(--font);font-size:16px;font-weight:800;color:var(--text)}
 
-/* ── REQUIREMENTS ── */
-.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.req-item{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);transition:all .25s;font-size:12px;font-weight:500;color:var(--text3)}
+/* Requirements */
+.req-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.req-item{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);transition:all .25s;font-size:12px;font-weight:500;color:var(--text3)}
 .req-item.met{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
-.req-check{width:18px;height:18px;border-radius:50%;border:2px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.req-check{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .25s}
 .req-item.met .req-check{background:var(--green);border-color:var(--green)}
 
-/* ── PATTERNS ── */
-.pattern-list{display:flex;flex-direction:column;gap:6px;min-height:48px}
-.pattern-item{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r-sm);font-size:12px;color:var(--red);font-weight:500}
+/* Patterns */
+.pattern-list{display:flex;flex-direction:column;gap:6px;min-height:44px}
+.pattern-item{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r-sm);font-size:12px;color:var(--red);font-weight:500}
 .pattern-ok{padding:12px;text-align:center;font-size:13px;color:var(--green);font-weight:600;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--r-sm)}
 
-/* ── CHART ── */
-.chart-wrap{position:relative;height:120px;margin-top:8px}
+/* Composition bars */
+.comp-bars{display:flex;flex-direction:column;gap:10px}
+.comp-row{display:flex;align-items:center;gap:10px}
+.comp-label{font-size:11px;font-weight:700;color:var(--text2);width:74px;flex-shrink:0;font-family:var(--mono)}
+.comp-track{flex:1;height:7px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.comp-fill{height:100%;border-radius:4px;transition:width .5s ease}
+.comp-count{font-size:11px;font-family:var(--mono);color:var(--text3);width:26px;text-align:right;flex-shrink:0}
+
+/* Entropy chart */
+.chart-wrap{position:relative;height:110px;margin-top:8px}
 canvas{border-radius:var(--r-sm)}
 
-/* ── COMPOSITION BAR ── */
-.comp-bars{display:flex;flex-direction:column;gap:8px}
-.comp-row{display:flex;align-items:center;gap:10px}
-.comp-label{font-size:12px;font-weight:600;color:var(--text2);width:80px;flex-shrink:0}
-.comp-track{flex:1;height:8px;background:var(--surface3);border-radius:4px;overflow:hidden}
-.comp-fill{height:100%;border-radius:4px;transition:width .5s ease}
-.comp-count{font-size:11px;font-family:var(--mono);color:var(--text3);width:30px;text-align:right;flex-shrink:0}
+/* Tip card */
+.tip-alert{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r);padding:14px 16px}
+.tip-alert-label{font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:flex;align-items:center;gap:5px}
+.tip-alert-text{font-size:13px;color:var(--text2);line-height:1.6}
 
-/* ── GENERATOR PAGE ── */
-.gen-wrap{max-width:640px;margin:0 auto}
+/* History card */
+.history-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto}
+.history-item{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm)}
+.history-pass{font-family:var(--mono);font-size:12px;color:var(--text2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-badge{flex-shrink:0;margin-left:8px}
+.history-empty{font-size:13px;color:var(--text3);text-align:center;padding:12px}
+
+/* ── GENERATOR ── */
+.gen-wrap{max-width:660px;margin:0 auto}
 .gen-output{
-  background:var(--surface2);border:2px solid var(--border);border-radius:var(--r);
-  padding:18px 20px;margin-bottom:16px;
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  min-height:64px;
+  background:var(--surface2);border:1.5px solid var(--border2);border-radius:var(--r-lg);
+  padding:20px 22px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:68px;position:relative;overflow:hidden;
 }
-.gen-pass{font-family:var(--mono);font-size:18px;font-weight:500;word-break:break-all;color:var(--text);flex:1}
-.gen-copy-btn{
-  flex-shrink:0;padding:8px 16px;border-radius:var(--r-sm);border:1px solid var(--accent-border);
-  background:var(--accent-bg);color:var(--accent);font-family:var(--font);font-size:13px;
-  font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;
+.gen-output::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.4}
+.gen-pass{font-family:var(--mono);font-size:17px;font-weight:500;word-break:break-all;color:var(--text);flex:1}
+.gen-actions{display:flex;gap:8px;flex-shrink:0}
+.gen-copy-btn,.gen-refresh-btn{
+  padding:8px 14px;border-radius:var(--r-sm);border:1px solid var(--border2);
+  background:var(--surface3);font-family:var(--font);font-size:12px;
+  font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;
+  color:var(--text2);
 }
-.gen-copy-btn:hover{background:var(--accent);color:#fff}
+.gen-copy-btn:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 .gen-copy-btn.copied{background:var(--green);border-color:var(--green);color:#fff}
+.gen-refresh-btn:hover{border-color:var(--border2);color:var(--text);background:var(--surface3)}
 
-.gen-controls{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
-.ctrl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.gen-controls{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:26px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.ctrl-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .ctrl-label{font-size:13px;font-weight:600;color:var(--text2)}
 .ctrl-val{font-size:14px;font-weight:700;font-family:var(--mono);color:var(--accent)}
-.slider{width:100%;height:6px;border-radius:3px;-webkit-appearance:none;appearance:none;background:var(--surface3);border:1px solid var(--border);cursor:pointer;margin-bottom:20px}
-.slider::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(37,99,235,.4)}
-.toggle-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
-.toggle-item{display:flex;align-items:center;gap:10px;padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all .2s}
-.toggle-item.on{background:var(--accent-bg);border-color:var(--accent-border)}
+.slider{width:100%;height:5px;border-radius:3px;-webkit-appearance:none;appearance:none;background:var(--surface3);cursor:pointer;margin-bottom:22px;outline:none}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 2px 8px rgba(79,142,247,.5);border:2px solid var(--surface)}
+.slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;border:2px solid var(--surface)}
+.toggle-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:22px}
+.toggle-item{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);cursor:pointer;transition:all .2s;user-select:none}
+.toggle-item.on{background:var(--accent-glow);border-color:var(--accent-border)}
 .toggle-dot{width:22px;height:13px;border-radius:7px;background:var(--border2);position:relative;transition:background .2s;flex-shrink:0}
-.toggle-dot::after{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.toggle-dot::after{content:'';position:absolute;left:2px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .toggle-item.on .toggle-dot{background:var(--accent)}
 .toggle-item.on .toggle-dot::after{left:11px}
-.toggle-lbl{font-size:13px;font-weight:600;color:var(--text2)}
-.gen-type-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
+.toggle-lbl{font-size:12px;font-weight:600;color:var(--text2)}
+.gen-type-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:22px}
 .type-btn{padding:10px;border:1px solid var(--border);border-radius:var(--r-sm);background:var(--surface2);font-family:var(--font);font-size:12px;font-weight:600;color:var(--text3);cursor:pointer;transition:all .2s;text-align:center}
-.type-btn.active{background:var(--accent-bg);border-color:var(--accent);color:var(--accent)}
+.type-btn.active{background:var(--accent-glow);border-color:var(--accent-border);color:var(--accent)}
 .btn-generate{
   width:100%;padding:15px;border:none;border-radius:var(--r);
-  background:var(--accent);color:#fff;font-family:var(--font);
-  font-size:16px;font-weight:700;cursor:pointer;
-  transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.35);
+  background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;font-family:var(--font);
+  font-size:15px;font-weight:700;cursor:pointer;
+  transition:all .2s;box-shadow:0 4px 18px rgba(79,142,247,.35);
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.btn-generate:hover{background:var(--accent2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(37,99,235,.45)}
+.btn-generate:hover{transform:translateY(-2px);box-shadow:0 6px 26px rgba(79,142,247,.45)}
 .btn-generate:active{transform:translateY(0)}
 
-/* ── BREACH CHECK ── */
-.breach-wrap{max-width:560px;margin:0 auto}
-.breach-input-row{display:flex;gap:8px;margin-bottom:16px}
+/* ── BREACH ── */
+.breach-wrap{max-width:580px;margin:0 auto}
+.breach-input-row{display:flex;gap:8px;margin-bottom:18px}
 .breach-input{
-  flex:1;padding:14px 16px;border:2px solid var(--border);border-radius:var(--r);
+  flex:1;padding:14px 16px;border:1.5px solid var(--border2);border-radius:var(--r);
   background:var(--surface2);color:var(--text);font-family:var(--mono);font-size:14px;
   outline:none;transition:all .2s;
 }
-.breach-input:focus{border-color:var(--accent);box-shadow:var(--shadow-glow)}
+.breach-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
 .btn-check{
   padding:14px 20px;border:none;border-radius:var(--r);
-  background:var(--accent);color:#fff;font-family:var(--font);
+  background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;font-family:var(--font);
   font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;
-  transition:all .2s;box-shadow:0 4px 12px rgba(37,99,235,.3);
+  transition:all .2s;box-shadow:0 4px 14px rgba(79,142,247,.3);
 }
-.btn-check:hover{background:var(--accent2)}
-.breach-result{border-radius:var(--r);padding:20px;display:none}
+.btn-check:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(79,142,247,.4)}
+.breach-result{border-radius:var(--r-lg);padding:22px;display:none;margin-top:4px}
 .breach-result.safe{background:var(--green-bg);border:1px solid var(--green-border)}
 .breach-result.pwned{background:var(--red-bg);border:1px solid var(--red-border)}
 .breach-result.error{background:var(--yellow-bg);border:1px solid var(--yellow-border)}
-.breach-result-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.breach-result-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.breach-result-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.breach-result-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
 .breach-result.safe .breach-result-icon{background:var(--green);color:#fff}
 .breach-result.pwned .breach-result-icon{background:var(--red);color:#fff}
 .breach-result.error .breach-result-icon{background:var(--yellow);color:#fff}
-.breach-result-title{font-size:16px;font-weight:700}
+.breach-result-title{font-family:var(--font);font-size:17px;font-weight:800}
 .breach-result.safe .breach-result-title{color:var(--green)}
 .breach-result.pwned .breach-result-title{color:var(--red)}
-.breach-result-body{font-size:13px;color:var(--text2);line-height:1.6}
-.breach-privacy{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-top:12px}
-.breach-privacy-title{font-size:13px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.breach-privacy-text{font-size:12px;color:var(--text3);line-height:1.6}
-.loading-dots{display:inline-flex;gap:4px}
+.breach-result.error .breach-result-title{color:var(--yellow)}
+.breach-result-body{font-size:13px;color:var(--text2);line-height:1.65}
+.breach-privacy{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-lg);padding:18px;margin-bottom:4px}
+.breach-privacy-title{font-size:13px;font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:7px;color:var(--text)}
+.breach-privacy-text{font-size:12px;color:var(--text3);line-height:1.65}
+.loading-dots{display:inline-flex;gap:4px;align-items:center}
 .loading-dots span{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:dotpulse 1.4s ease-in-out infinite}
 .loading-dots span:nth-child(2){animation-delay:.2s}
 .loading-dots span:nth-child(3){animation-delay:.4s}
-@keyframes dotpulse{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+@keyframes dotpulse{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
 
-/* ── AUTH PAGE ── */
+/* ── AUTH ── */
 .auth-wrap{max-width:440px;margin:0 auto}
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface3);border-radius:12px;padding:4px;margin-bottom:24px}
-.auth-tab{padding:10px;border:none;background:transparent;border-radius:9px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--text3);cursor:pointer;transition:all .2s}
-.auth-tab.active{background:var(--surface);color:var(--accent);box-shadow:var(--shadow-sm)}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:26px}
+.auth-tab{padding:10px;border:none;background:transparent;border-radius:9px;font-family:var(--font);font-size:14px;font-weight:700;color:var(--text3);cursor:pointer;transition:all .2s}
+.auth-tab.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}
 .auth-panel{display:none}.auth-panel.active{display:block}
-.form-group{margin-bottom:16px}
-.form-lbl{font-size:12px;font-weight:700;color:var(--text2);margin-bottom:7px;display:block;text-transform:uppercase;letter-spacing:.7px}
+.form-group{margin-bottom:18px}
+.form-lbl{font-size:11px;font-weight:700;color:var(--text3);margin-bottom:8px;display:block;text-transform:uppercase;letter-spacing:.8px}
 .inp-wrap{position:relative}
 .inp-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text3);pointer-events:none}
 .form-inp{
-  width:100%;padding:12px 42px 12px 42px;border:1.5px solid var(--border);
+  width:100%;padding:13px 44px 13px 44px;border:1.5px solid var(--border2);
   border-radius:var(--r);background:var(--surface2);color:var(--text);
-  font-family:var(--font);font-size:14px;outline:none;transition:all .2s;
+  font-family:var(--body);font-size:14px;outline:none;transition:all .2s;
 }
-.form-inp:focus{border-color:var(--accent);box-shadow:var(--shadow-glow);background:var(--surface)}
+.form-inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);background:var(--surface3)}
 .form-inp::placeholder{color:var(--text3)}
-.inp-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);transition:color .2s}
+.inp-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);transition:color .2s;padding:4px}
 .inp-eye:hover{color:var(--accent)}
-
-/* Inline mini strength meter in auth */
 .mini-meter{margin-top:10px}
 .mini-bars{display:flex;gap:3px;margin-bottom:6px}
-.mini-bar{flex:1;height:4px;border-radius:2px;background:var(--surface3);transition:background .35s}
+.mini-bar{flex:1;height:3px;border-radius:2px;background:var(--surface3);transition:background .35s}
 .mini-meta{display:flex;justify-content:space-between;font-size:11px;font-family:var(--mono);color:var(--text3)}
-
 .auth-btn{
   width:100%;padding:14px;border:none;border-radius:var(--r);
-  background:var(--accent);color:#fff;font-family:var(--font);
-  font-size:15px;font-weight:700;cursor:pointer;margin-top:6px;
-  transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.3);
+  background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;font-family:var(--font);
+  font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;
+  transition:all .2s;box-shadow:0 4px 16px rgba(79,142,247,.3);
   display:flex;align-items:center;justify-content:center;gap:8px;
 }
-.auth-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.auth-btn:hover{transform:translateY(-1px);box-shadow:0 6px 22px rgba(79,142,247,.4)}
 .auth-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--text3)}
-.auth-switch a{color:var(--accent);font-weight:600;cursor:pointer;text-decoration:none}
-.auth-error{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r-sm);padding:10px 14px;font-size:13px;color:var(--red);margin-bottom:16px;display:none;align-items:center;gap:8px}
+.auth-switch a{color:var(--accent);font-weight:600;cursor:pointer}
+.auth-error{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r-sm);padding:11px 14px;font-size:13px;color:var(--red);margin-bottom:16px;display:none;align-items:center;gap:8px}
 
-/* ── DASHBOARD ── */
+/* Dashboard */
 .dash-wrap{display:none}
-.dash-profile{background:linear-gradient(135deg,var(--accent),#7c3aed);border-radius:var(--r-lg);padding:28px;color:#fff;margin-bottom:20px;position:relative;overflow:hidden}
-.dash-profile::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");background-size:80px}
-.dash-profile-inner{position:relative;display:flex;align-items:center;gap:16px}
-.dash-avatar{width:64px;height:64px;border-radius:16px;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;flex-shrink:0;border:2px solid rgba(255,255,255,.4)}
-.dash-name{font-size:22px;font-weight:800;margin-bottom:3px}
-.dash-email{font-size:13px;opacity:.75}
-.dash-badge{display:inline-block;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,.2);font-size:12px;font-weight:700;margin-top:8px;border:1px solid rgba(255,255,255,.3)}
+.dash-header{
+  background:linear-gradient(135deg,#1a2444,#1a1435);
+  border:1px solid var(--border2);border-radius:var(--r-xl);padding:28px;
+  margin-bottom:20px;position:relative;overflow:hidden;
+}
+[data-theme="light"] .dash-header{background:linear-gradient(135deg,#eff4ff,#f5f0ff)}
+.dash-header::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,247,.2),transparent)}
+.dash-header-inner{position:relative;display:flex;align-items:center;gap:18px}
+.dash-avatar{
+  width:68px;height:68px;border-radius:18px;
+  background:linear-gradient(135deg,var(--accent),#7c3aed);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font);font-size:24px;font-weight:800;color:#fff;
+  flex-shrink:0;box-shadow:0 6px 20px rgba(79,142,247,.35);
+}
+.dash-name{font-family:var(--font);font-size:22px;font-weight:800;margin-bottom:3px;color:var(--text)}
+.dash-email{font-size:13px;color:var(--text2);margin-bottom:10px}
+.dash-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(79,142,247,.15);color:var(--accent);font-size:12px;font-weight:700;border:1px solid var(--accent-border)}
 .dash-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:600px){.dash-grid{grid-template-columns:1fr 1fr}}
-.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow-sm)}
-.dash-card-lbl{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.dash-card-val{font-size:20px;font-weight:800;font-family:var(--mono)}
-.dash-prog-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
-.dash-prog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;font-weight:600}
-.dash-prog-track{height:10px;background:var(--surface3);border-radius:5px;overflow:hidden;margin-bottom:6px}
-.dash-prog-fill{height:100%;border-radius:5px;transition:width .7s ease}
-.dash-prog-labs{display:flex;justify-content:space-between;font-size:11px;font-family:var(--mono);color:var(--text3)}
-.pass-reveal-row{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pass-reveal-lbl{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
-.pass-reveal-val{font-family:var(--mono);font-size:16px;letter-spacing:2px;word-break:break-all}
-.reveal-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-family:var(--font);font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .2s}
+.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.dash-card-lbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.dash-card-val{font-family:var(--font);font-size:20px;font-weight:800}
+.dash-prog-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:20px;margin-bottom:14px}
+.dash-prog-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:13px;font-weight:600}
+.dash-prog-track{height:8px;background:var(--surface3);border-radius:4px;overflow:hidden;margin-bottom:7px}
+.dash-prog-fill{height:100%;border-radius:4px;transition:width .7s ease}
+.dash-prog-labs{display:flex;justify-content:space-between;font-size:10px;font-family:var(--mono);color:var(--text3)}
+.pass-reveal-row{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pass-reveal-lbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.pass-reveal-val{font-family:var(--mono);font-size:15px;letter-spacing:2px;word-break:break-all;color:var(--text)}
+.reveal-btn{flex-shrink:0;padding:7px 14px;border:1px solid var(--border2);border-radius:8px;background:var(--surface);font-family:var(--font);font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;transition:all .2s}
 .reveal-btn:hover{border-color:var(--accent);color:var(--accent)}
 .logout-btn{width:100%;padding:12px;border:1.5px solid var(--border);border-radius:var(--r);background:transparent;font-family:var(--font);font-size:14px;font-weight:600;color:var(--text3);cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .logout-btn:hover{border-color:var(--red);color:var(--red);background:var(--red-bg)}
 
 /* ── TIPS PAGE ── */
-.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.tip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
-.tip-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.tip-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px}
-.tip-title{font-size:15px;font-weight:700;margin-bottom:6px}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.tip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.tip-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--border2)}
+.tip-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:20px}
+.tip-title{font-family:var(--font);font-size:14px;font-weight:800;margin-bottom:7px}
 .tip-body{font-size:13px;color:var(--text2);line-height:1.65}
 
 /* ── QUIZ ── */
-.quiz-wrap{max-width:560px;margin:0 auto}
-.quiz-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow-md)}
-.quiz-progress{height:5px;background:var(--surface3);border-radius:3px;margin-bottom:24px;overflow:hidden}
-.quiz-prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s ease}
-.quiz-q{font-size:17px;font-weight:700;margin-bottom:20px;line-height:1.5}
-.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.quiz-wrap{max-width:580px;margin:0 auto}
+.quiz-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:30px;box-shadow:var(--shadow-md)}
+.quiz-progress-row{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.quiz-prog-track{flex:1;height:4px;background:var(--surface3);border-radius:2px;overflow:hidden}
+.quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--purple));border-radius:2px;transition:width .4s ease}
+.quiz-prog-label{font-size:11px;font-family:var(--mono);color:var(--text3);white-space:nowrap}
+.quiz-q{font-family:var(--font);font-size:17px;font-weight:700;margin-bottom:22px;line-height:1.4;color:var(--text)}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
 .quiz-opt{
-  padding:14px 16px;border:2px solid var(--border);border-radius:var(--r);
-  background:var(--surface2);font-family:var(--font);font-size:14px;font-weight:500;
+  padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);
+  background:var(--surface2);font-family:var(--body);font-size:14px;font-weight:500;
   color:var(--text);cursor:pointer;text-align:left;transition:all .2s;
-  display:flex;align-items:center;gap:10px;
 }
-.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-bg);color:var(--accent)}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-glow);color:var(--accent)}
 .quiz-opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
 .quiz-opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
-.quiz-explain{background:var(--accent-bg);border:1px solid var(--accent-border);border-radius:var(--r-sm);padding:14px;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:16px;display:none}
-.quiz-next{padding:12px 24px;border:none;border-radius:var(--r);background:var(--accent);color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:none}
-.quiz-next:hover{background:var(--accent2)}
+.quiz-explain{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--r-sm);padding:14px;font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:18px;display:none}
+.quiz-next{padding:11px 24px;border:none;border-radius:var(--r);background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;display:none}
+.quiz-next:hover{transform:translateY(-1px)}
 .quiz-score{text-align:center;padding:20px 0}
-.quiz-score-num{font-size:56px;font-weight:900;color:var(--accent);font-family:var(--mono)}
-.quiz-score-lbl{font-size:16px;color:var(--text2);margin-bottom:16px}
-.quiz-restart{padding:12px 28px;border:none;border-radius:var(--r);background:var(--accent);color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
+.quiz-score-ring{width:100px;height:100px;margin:0 auto 20px;position:relative}
+.quiz-score-ring svg{transform:rotate(-90deg)}
+.quiz-score-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:26px;font-weight:800;color:var(--accent)}
+.quiz-score-lbl{font-size:15px;color:var(--text2);margin-bottom:20px;font-weight:500}
+.quiz-restart{padding:12px 28px;border:none;border-radius:var(--r);background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s}
+.quiz-restart:hover{transform:translateY(-1px)}
 
-/* ── UTILITY ── */
-.badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700}
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.2px}
 .badge-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
 .badge-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
 .badge-yellow{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-border)}
-.badge-blue{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border)}
+.badge-blue{background:var(--accent-glow);color:var(--accent);border:1px solid var(--accent-border)}
+.badge-purple{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.25)}
+
+/* ── DIVIDER ── */
 .divider{height:1px;background:var(--border);margin:20px 0}
-.section-title{font-size:22px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px}
-.section-sub{font-size:13px;color:var(--text3);margin-bottom:24px}
 
 /* ── FOOTER ── */
-.footer{text-align:center;padding:20px;font-size:12px;color:var(--text3);border-top:1px solid var(--border);margin-top:auto}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes popIn{0%{opacity:0;transform:scale(.96)}60%{transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
-.fade-up{animation:fadeUp .4s ease both}
-.pop-in{animation:popIn .35s ease both}
+.footer{text-align:center;padding:22px;font-size:12px;color:var(--text3);border-top:1px solid var(--border);margin-top:auto;background:var(--surface)}
+.footer strong{color:var(--text2)}
 
 /* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
+/* ── ANIMATIONS ── */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes popIn{0%{opacity:0;transform:scale(.94)}60%{transform:scale(1.02)}100%{opacity:1;transform:scale(1)}}
+.pop-in{animation:popIn .35s ease both}
+
+/* ── EXPORT BTN ── */
+.export-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;border:1px solid var(--border2);border-radius:var(--r-sm);
+  background:var(--surface2);color:var(--text2);font-family:var(--font);
+  font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.export-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow)}
+
 @media(max-width:600px){
-  .topbar{padding:0 16px}.main{padding:20px 16px}
   .stats-row{grid-template-columns:1fr 1fr}
   .req-grid{grid-template-columns:1fr}
-  .nav-tabs{display:none}
-  .mobile-nav{display:flex!important}
   .toggle-grid{grid-template-columns:1fr}
   .gen-type-row{grid-template-columns:1fr 1fr}
   .dash-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{gap:20px}
 }
-.mobile-nav{display:none;gap:2px;overflow-x:auto;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--border);-webkit-overflow-scrolling:touch}
-.mobile-nav .nav-tab{white-space:nowrap;flex-shrink:0}
 </style>
 </head>
 <body>
+<div class="mesh">
+  <div class="mesh-orb orb1"></div>
+  <div class="mesh-orb orb2"></div>
+  <div class="mesh-orb orb3"></div>
+</div>
+
 <div class="app">
 
 <!-- TOPBAR -->
-<div class="nav-tabs">
+<header class="topbar">
+  <div class="brand" onclick="goPage('home')">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1.5" fill="#fff" stroke="none"/></svg>
+    </div>
+    <div>
+      <span class="brand-name">Pass<em>Guard</em></span>
+      <span class="brand-tag">PRO</span>
+    </div>
+  </div>
 
-  <button class="nav-tab active" onclick="goPage('analyzer')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="11" cy="11" r="7"/>
-      <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-    Analyzer
-  </button>
+  <div class="topbar-center">
+    <button class="nav-tab" onclick="goPage('analyzer')" id="nt-analyzer">Analyzer</button>
+    <button class="nav-tab" onclick="goPage('generator')" id="nt-generator">Generator</button>
+    <button class="nav-tab" onclick="goPage('breach')" id="nt-breach">Breach Check</button>
+    <button class="nav-tab" onclick="goPage('auth')" id="nt-auth">Account</button>
+    <button class="nav-tab" onclick="goPage('tips')" id="nt-tips">Tips</button>
+    <button class="nav-tab" onclick="goPage('quiz')" id="nt-quiz">Quiz</button>
+  </div>
 
-  <button class="nav-tab" onclick="goPage('generator')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
-    </svg>
-    Generator
-  </button>
-
-  <button class="nav-tab" onclick="goPage('breach')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
-      <path d="M9 12l2 2 4-4"/>
-    </svg>
-    Breach Check
-  </button>
-
-  <button class="nav-tab" onclick="goPage('auth')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="8" r="4"/>
-      <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
-    </svg>
-    Account
-  </button>
-
-  <button class="nav-tab" onclick="goPage('tips')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M9 18h6"/>
-      <path d="M10 22h4"/>
-      <path d="M12 2a7 7 0 0 0-4 12c1 1 2 2 2 4h4c0-2 1-3 2-4a7 7 0 0 0-4-12z"/>
-    </svg>
-    Tips
-  </button>
-
-  <button class="nav-tab" onclick="goPage('quiz')">
-    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <circle cx="12" cy="12" r="10"/>
-      <path d="M9 9a3 3 0 1 1 5.2 2"/>
-      <circle cx="12" cy="17" r="1"/>
-    </svg>
-    Quiz
-  </button>
-
-</div>
+  <div class="topbar-right">
+    <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme" id="themeBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="themeIcon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
-  <button class="nav-tab active" onclick="goPage('analyzer')">Analyzer</button>
-  <button class="nav-tab" onclick="goPage('generator')">Generator</button>
-  <button class="nav-tab" onclick="goPage('breach')">Breach</button>
-  <button class="nav-tab" onclick="goPage('auth')">Account</button>
-  <button class="nav-tab" onclick="goPage('tips')">Tips</button>
-  <button class="nav-tab" onclick="goPage('quiz')">Quiz</button>
+  <button class="nav-tab" onclick="goPage('home')" id="mn-home">Home</button>
+  <button class="nav-tab" onclick="goPage('analyzer')" id="mn-analyzer">Analyzer</button>
+  <button class="nav-tab" onclick="goPage('generator')" id="mn-generator">Generator</button>
+  <button class="nav-tab" onclick="goPage('breach')" id="mn-breach">Breach</button>
+  <button class="nav-tab" onclick="goPage('auth')" id="mn-auth">Account</button>
+  <button class="nav-tab" onclick="goPage('tips')" id="mn-tips">Tips</button>
+  <button class="nav-tab" onclick="goPage('quiz')" id="mn-quiz">Quiz</button>
 </div>
+
 <main class="main">
 
-<!-- ════════════ PAGE: ANALYZER ════════════ -->
-<div class="page active fade-up" id="page-analyzer">
+<!-- ════════════ HOME ════════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      NS-CSC 219 · Group Project · NSUK
+    </div>
+    <h1 class="hero-title">
+      Your Password<br><span>Intelligence</span><br>Platform
+    </h1>
+    <p class="hero-sub">
+      Real-time strength analysis, breach detection, AI-powered generation, and security education — all in one professional tool.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="goPage('analyzer')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Analyze a Password
+      </button>
+      <button class="btn-secondary" onclick="goPage('generator')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate Strong Password
+      </button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-val">6</div><div class="hero-stat-lbl">Security Checks</div></div>
+      <div><div class="hero-stat-val">8</div><div class="hero-stat-lbl">Quiz Questions</div></div>
+      <div><div class="hero-stat-val">HIBP</div><div class="hero-stat-lbl">Breach Database</div></div>
+      <div><div class="hero-stat-val">∞</div><div class="hero-stat-lbl">Entropy Analysis</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ ANALYZER ════════════ -->
+<div class="page" id="page-analyzer">
+  <div class="sec-head">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="sec-title">Password Strength Analyzer</div>
+        <div class="sec-sub">Real-time security analysis as you type</div>
+      </div>
+      <button class="export-btn" onclick="exportReport()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export Report
+      </button>
+    </div>
+  </div>
+
   <div class="pass-zone">
-    <div class="pass-zone-title">Password Strength Analyzer</div>
-    <div class="pass-zone-sub">Type any password to get a full real-time security analysis</div>
+    <div class="pass-zone-title">Enter Password to Analyze</div>
+    <div class="pass-zone-sub">Your password stays on your device — nothing is ever transmitted</div>
     <div class="pass-input-wrap">
-      <input class="pass-input" type="password" id="mainPass" placeholder="Enter a password to analyze…" oninput="fullAnalyze(this.value)" autocomplete="off" spellcheck="false">
+      <input class="pass-input" type="password" id="mainPass" placeholder="Type any password here…" oninput="fullAnalyze(this.value)" autocomplete="off" spellcheck="false">
       <button class="pass-eye" onclick="togglePassVis('mainPass',this)" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
       </button>
     </div>
 
-    <!-- Big meter -->
     <div class="meter-wrap">
       <div class="meter-track"><div class="meter-fill" id="mainMeter"></div></div>
       <div class="meter-labels">
@@ -474,64 +615,50 @@ canvas{border-radius:var(--r-sm)}
       </div>
     </div>
 
-    <!-- Stats -->
     <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-val" id="statLen" style="color:var(--text3)">0</div>
-        <div class="stat-lbl">Length</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statEntropy" style="color:var(--text3)">0</div>
-        <div class="stat-lbl">Entropy (bits)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-val" id="statCharset" style="color:var(--text3)">0</div>
-        <div class="stat-lbl">Charset Size</div>
-      </div>
+      <div class="stat-box"><div class="stat-val" id="statLen" style="color:var(--text3)">0</div><div class="stat-lbl">Length</div></div>
+      <div class="stat-box"><div class="stat-val" id="statEntropy" style="color:var(--text3)">0</div><div class="stat-lbl">Entropy (bits)</div></div>
+      <div class="stat-box"><div class="stat-val" id="statCharset" style="color:var(--text3)">0</div><div class="stat-lbl">Charset Size</div></div>
     </div>
 
-    <!-- Crack time -->
     <div class="crack-banner" id="crackBanner">
       <div class="crack-icon">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <div>
         <div class="crack-label">Estimated Time to Crack</div>
-        <div class="crack-val" id="crackTime">—</div>
+        <div class="crack-val" id="crackTime">Enter a password above</div>
       </div>
     </div>
   </div>
 
   <div class="analyzer-grid">
-    <!-- LEFT COLUMN -->
     <div style="display:flex;flex-direction:column;gap:16px">
 
-      <!-- Requirements -->
       <div class="card">
         <div class="card-head">
           <div class="card-title">
-            <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
             Requirements
           </div>
           <span class="badge badge-blue" id="reqCount">0/6</span>
         </div>
         <div class="card-body">
           <div class="req-grid">
-            <div class="req-item" id="req-len"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>8+ characters</div>
-            <div class="req-item" id="req-upper"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Uppercase (A–Z)</div>
-            <div class="req-item" id="req-lower"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Lowercase (a–z)</div>
-            <div class="req-item" id="req-num"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Number (0–9)</div>
-            <div class="req-item" id="req-sym"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Special character</div>
-            <div class="req-item" id="req-long"><div class="req-check"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>12+ characters</div>
+            <div class="req-item" id="req-len"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>8+ characters</div>
+            <div class="req-item" id="req-upper"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Uppercase (A–Z)</div>
+            <div class="req-item" id="req-lower"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Lowercase (a–z)</div>
+            <div class="req-item" id="req-num"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Number (0–9)</div>
+            <div class="req-item" id="req-sym"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Special character</div>
+            <div class="req-item" id="req-long"><div class="req-check"><svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>12+ characters</div>
           </div>
         </div>
       </div>
 
-      <!-- Pattern Warnings -->
       <div class="card">
         <div class="card-head">
           <div class="card-title">
-            <div class="icon" style="background:var(--red-bg);color:var(--red)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+            <div class="card-icon" style="background:var(--red-bg);color:var(--red)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
             Pattern Warnings
           </div>
         </div>
@@ -542,50 +669,63 @@ canvas{border-radius:var(--r-sm)}
         </div>
       </div>
 
-    </div>
-
-    <!-- RIGHT COLUMN -->
-    <div style="display:flex;flex-direction:column;gap:16px">
-
-      <!-- Composition -->
+      <!-- History -->
       <div class="card">
         <div class="card-head">
           <div class="card-title">
-            <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+            <div class="card-icon" style="background:var(--yellow-bg);color:var(--yellow)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            Session History
+          </div>
+          <button onclick="clearHistory()" style="font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:var(--font)">Clear</button>
+        </div>
+        <div class="card-body">
+          <div class="history-list" id="historyList">
+            <div class="history-empty">No passwords analyzed yet</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-title">
+            <div class="card-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
             Character Composition
           </div>
         </div>
         <div class="card-body">
           <div class="comp-bars">
             <div class="comp-row">
-              <div class="comp-label" style="color:#2563eb">Uppercase</div>
-              <div class="comp-track"><div class="comp-fill" id="compUpper" style="background:#2563eb;width:0%"></div></div>
+              <div class="comp-label" style="color:var(--accent)">Uppercase</div>
+              <div class="comp-track"><div class="comp-fill" id="compUpper" style="background:var(--accent);width:0%"></div></div>
               <div class="comp-count" id="compUpperN">0</div>
             </div>
             <div class="comp-row">
-              <div class="comp-label" style="color:#7c3aed">Lowercase</div>
-              <div class="comp-track"><div class="comp-fill" id="compLower" style="background:#7c3aed;width:0%"></div></div>
+              <div class="comp-label" style="color:var(--purple)">Lowercase</div>
+              <div class="comp-track"><div class="comp-fill" id="compLower" style="background:var(--purple);width:0%"></div></div>
               <div class="comp-count" id="compLowerN">0</div>
             </div>
             <div class="comp-row">
-              <div class="comp-label" style="color:#059669">Numbers</div>
-              <div class="comp-track"><div class="comp-fill" id="compNum" style="background:#059669;width:0%"></div></div>
+              <div class="comp-label" style="color:var(--green)">Numbers</div>
+              <div class="comp-track"><div class="comp-fill" id="compNum" style="background:var(--green);width:0%"></div></div>
               <div class="comp-count" id="compNumN">0</div>
             </div>
             <div class="comp-row">
-              <div class="comp-label" style="color:#d97706">Symbols</div>
-              <div class="comp-track"><div class="comp-fill" id="compSym" style="background:#d97706;width:0%"></div></div>
+              <div class="comp-label" style="color:var(--yellow)">Symbols</div>
+              <div class="comp-track"><div class="comp-fill" id="compSym" style="background:var(--yellow);width:0%"></div></div>
               <div class="comp-count" id="compSymN">0</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Entropy Chart -->
       <div class="card">
         <div class="card-head">
           <div class="card-title">
-            <div class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="card-icon" style="background:var(--green-bg);color:var(--green)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
             Entropy as You Type
           </div>
         </div>
@@ -596,26 +736,36 @@ canvas{border-radius:var(--r-sm)}
         </div>
       </div>
 
-      <!-- Improvement tip -->
-      <div class="card" id="tipCard" style="border-color:var(--accent-border);background:var(--accent-bg)">
-        <div class="card-body" style="padding:16px 18px">
-          <div style="font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">💡 Improvement Tip</div>
-          <div style="font-size:13px;color:var(--text2);line-height:1.6" id="tipText">Start typing a password to get personalized improvement suggestions.</div>
+      <div class="tip-alert" id="tipAlert">
+        <div class="tip-alert-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Improvement Tip
         </div>
+        <div class="tip-alert-text" id="tipText">Start typing a password to get personalized security suggestions.</div>
       </div>
 
     </div>
   </div>
 </div>
 
-<!-- ════════════ PAGE: GENERATOR ════════════ -->
-<div class="page fade-up" id="page-generator">
-  <div class="section-title">Password Generator</div>
-  <div class="section-sub">Generate strong, customizable passwords instantly</div>
+<!-- ════════════ GENERATOR ════════════ -->
+<div class="page" id="page-generator">
+  <div class="sec-head">
+    <div class="sec-title">Password Generator</div>
+    <div class="sec-sub">Generate cryptographically strong passwords instantly</div>
+  </div>
   <div class="gen-wrap">
     <div class="gen-output">
       <div class="gen-pass" id="genOutput" style="color:var(--text3);font-size:14px">Click generate to create a password</div>
-      <button class="gen-copy-btn" id="genCopyBtn" onclick="copyGenerated()">Copy</button>
+      <div class="gen-actions">
+        <button class="gen-refresh-btn" onclick="generatePassword()" title="Regenerate">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+        <button class="gen-copy-btn" id="genCopyBtn" onclick="copyGenerated()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+      </div>
     </div>
 
     <div class="gen-controls">
@@ -625,54 +775,46 @@ canvas{border-radius:var(--r-sm)}
       </div>
       <input type="range" class="slider" id="lenSlider" min="6" max="64" value="16" oninput="document.getElementById('lenVal').textContent=this.value">
 
-      <div style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px">Generation Mode</div>
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Generation Mode</div>
       <div class="gen-type-row">
         <button class="type-btn active" id="typeRandom" onclick="setGenType('random')">🔑 Random</button>
         <button class="type-btn" id="typePassphrase" onclick="setGenType('passphrase')">📖 Passphrase</button>
         <button class="type-btn" id="typePronounce" onclick="setGenType('pronounce')">🗣️ Memorable</button>
       </div>
 
-      <div style="font-size:12px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px" id="charToggleLabel">Character Types</div>
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px" id="charToggleLabel">Character Types</div>
       <div class="toggle-grid" id="charToggles">
-        <div class="toggle-item on" id="tog-upper" onclick="toggleOpt('upper')">
-          <div class="toggle-dot"></div><div class="toggle-lbl">Uppercase (A–Z)</div>
-        </div>
-        <div class="toggle-item on" id="tog-lower" onclick="toggleOpt('lower')">
-          <div class="toggle-dot"></div><div class="toggle-lbl">Lowercase (a–z)</div>
-        </div>
-        <div class="toggle-item on" id="tog-num" onclick="toggleOpt('num')">
-          <div class="toggle-dot"></div><div class="toggle-lbl">Numbers (0–9)</div>
-        </div>
-        <div class="toggle-item on" id="tog-sym" onclick="toggleOpt('sym')">
-          <div class="toggle-dot"></div><div class="toggle-lbl">Symbols (!@#…)</div>
-        </div>
-        <div class="toggle-item" id="tog-noambig" onclick="toggleOpt('noambig')">
-          <div class="toggle-dot"></div><div class="toggle-lbl">Exclude 0,O,l,1</div>
-        </div>
+        <div class="toggle-item on" id="tog-upper" onclick="toggleOpt('upper')"><div class="toggle-dot"></div><div class="toggle-lbl">Uppercase (A–Z)</div></div>
+        <div class="toggle-item on" id="tog-lower" onclick="toggleOpt('lower')"><div class="toggle-dot"></div><div class="toggle-lbl">Lowercase (a–z)</div></div>
+        <div class="toggle-item on" id="tog-num" onclick="toggleOpt('num')"><div class="toggle-dot"></div><div class="toggle-lbl">Numbers (0–9)</div></div>
+        <div class="toggle-item on" id="tog-sym" onclick="toggleOpt('sym')"><div class="toggle-dot"></div><div class="toggle-lbl">Symbols (!@#…)</div></div>
+        <div class="toggle-item" id="tog-noambig" onclick="toggleOpt('noambig')"><div class="toggle-dot"></div><div class="toggle-lbl">Exclude 0,O,l,1</div></div>
       </div>
     </div>
 
     <button class="btn-generate" onclick="generatePassword()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
       Generate Password
     </button>
 
-    <div style="margin-top:16px" id="genStrengthWrap" style="display:none">
+    <div style="margin-top:16px" id="genStrengthWrap">
       <div class="card">
-        <div class="card-body" style="padding:16px 18px">
-          <div style="font-size:12px;color:var(--text3);margin-bottom:6px;font-weight:600">Generated Password Strength</div>
-          <div class="meter-track" style="height:8px;margin-bottom:8px"><div class="meter-fill" id="genMeter"></div></div>
-          <div style="font-size:13px;font-weight:700" id="genLabel" style="color:var(--text3)"></div>
+        <div class="card-body" style="padding:14px 18px">
+          <div style="font-size:11px;color:var(--text3);margin-bottom:7px;font-weight:700;text-transform:uppercase;letter-spacing:.8px">Generated Password Strength</div>
+          <div class="meter-track" style="height:6px;margin-bottom:8px"><div class="meter-fill" id="genMeter"></div></div>
+          <div style="font-size:13px;font-weight:700;font-family:var(--font)" id="genLabel"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════ PAGE: BREACH CHECK ════════════ -->
-<div class="page fade-up" id="page-breach">
-  <div class="section-title">Breach Database Check</div>
-  <div class="section-sub">Check if your password has appeared in a known data breach (via HaveIBeenPwned)</div>
+<!-- ════════════ BREACH CHECK ════════════ -->
+<div class="page" id="page-breach">
+  <div class="sec-head">
+    <div class="sec-title">Breach Database Check</div>
+    <div class="sec-sub">Check if your password appeared in a known data breach via HaveIBeenPwned</div>
+  </div>
   <div class="breach-wrap">
     <div class="breach-input-row">
       <input class="breach-input" type="password" id="breachPass" placeholder="Enter password to check…" autocomplete="off" spellcheck="false">
@@ -685,11 +827,11 @@ canvas{border-radius:var(--r-sm)}
         Your Privacy is Protected
       </div>
       <div class="breach-privacy-text">
-        This tool uses the <strong>k-anonymity model</strong>: only the first 5 characters of your password's SHA-1 hash are ever sent to the API. Your actual password <strong>never leaves your device</strong>. This is the same technique used by major browsers like Chrome and Firefox for their built-in breach checks.
+        This tool uses the <strong>k-anonymity model</strong>: only the first 5 characters of your password's SHA-1 hash are sent to the API. Your actual password <strong>never leaves your device</strong> — the same technique used by Chrome and Firefox for their built-in breach checks.
       </div>
     </div>
 
-    <div style="margin-top:16px" id="breachResult" class="breach-result">
+    <div style="margin-top:14px" id="breachResult" class="breach-result">
       <div class="breach-result-head">
         <div class="breach-result-icon" id="breachIcon"></div>
         <div class="breach-result-title" id="breachTitle"></div>
@@ -699,41 +841,40 @@ canvas{border-radius:var(--r-sm)}
   </div>
 </div>
 
-<!-- ════════════ PAGE: AUTH / ACCOUNT ════════════ -->
-<div class="page fade-up" id="page-auth">
+<!-- ════════════ AUTH ════════════ -->
+<div class="page" id="page-auth">
   <div class="auth-wrap" id="authFormsWrap">
-    <div style="margin-bottom:20px">
-      <div class="section-title">Account</div>
-      <div class="section-sub">Register or sign in to save your session</div>
+    <div style="margin-bottom:22px">
+      <div class="sec-title">Account</div>
+      <div class="sec-sub">Register or sign in to track your session</div>
     </div>
     <div class="auth-tabs">
       <button class="auth-tab active" id="atRegister" onclick="switchAuthTab('register')">Create Account</button>
       <button class="auth-tab" id="atLogin" onclick="switchAuthTab('login')">Sign In</button>
     </div>
 
-    <!-- Register -->
     <div class="auth-panel active" id="ap-register">
-      <div class="auth-error" id="regErr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="regErrTxt"></span></div>
+      <div class="auth-error" id="regErr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="regErrTxt"></span></div>
       <div class="form-group">
         <label class="form-lbl">Full Name</label>
         <div class="inp-wrap">
-          <span class="inp-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+          <span class="inp-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
           <input class="form-inp" type="text" id="rName" placeholder="Your full name">
         </div>
       </div>
       <div class="form-group">
         <label class="form-lbl">Email</label>
         <div class="inp-wrap">
-          <span class="inp-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span class="inp-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
           <input class="form-inp" type="email" id="rEmail" placeholder="you@example.com">
         </div>
       </div>
       <div class="form-group">
         <label class="form-lbl">Password</label>
         <div class="inp-wrap">
-          <span class="inp-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <span class="inp-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
           <input class="form-inp" type="password" id="rPass" placeholder="Create a strong password" oninput="miniAnalyze(this.value)" autocomplete="new-password">
-          <button class="inp-eye" onclick="togglePassVis('rPass',this)" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <button class="inp-eye" onclick="togglePassVis('rPass',this)" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
         <div class="mini-meter">
           <div class="mini-bars">
@@ -744,42 +885,40 @@ canvas{border-radius:var(--r-sm)}
         </div>
       </div>
       <button class="auth-btn" onclick="doRegister()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
         Create Account
       </button>
       <div class="auth-switch">Already have an account? <a onclick="switchAuthTab('login')">Sign in</a></div>
     </div>
 
-    <!-- Login -->
     <div class="auth-panel" id="ap-login">
-      <div class="auth-error" id="loginErr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="loginErrTxt"></span></div>
+      <div class="auth-error" id="loginErr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="loginErrTxt"></span></div>
       <div class="form-group">
         <label class="form-lbl">Email</label>
         <div class="inp-wrap">
-          <span class="inp-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <span class="inp-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
           <input class="form-inp" type="email" id="lEmail" placeholder="you@example.com">
         </div>
       </div>
       <div class="form-group">
         <label class="form-lbl">Password</label>
         <div class="inp-wrap">
-          <span class="inp-ico"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+          <span class="inp-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
           <input class="form-inp" type="password" id="lPass" placeholder="Your password" autocomplete="current-password">
-          <button class="inp-eye" onclick="togglePassVis('lPass',this)" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+          <button class="inp-eye" onclick="togglePassVis('lPass',this)" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
       </div>
       <button class="auth-btn" onclick="doLogin()">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Sign In
       </button>
       <div class="auth-switch">No account? <a onclick="switchAuthTab('register')">Register</a></div>
     </div>
   </div>
 
-  <!-- Dashboard (shown after login) -->
   <div class="dash-wrap" id="dashWrap">
-    <div class="dash-profile pop-in">
-      <div class="dash-profile-inner">
+    <div class="dash-header pop-in">
+      <div class="dash-header-inner">
         <div class="dash-avatar" id="dAvatar"></div>
         <div>
           <div class="dash-name" id="dName"></div>
@@ -788,55 +927,58 @@ canvas{border-radius:var(--r-sm)}
         </div>
       </div>
     </div>
-
     <div class="dash-grid">
       <div class="dash-card"><div class="dash-card-lbl">Security Status</div><div class="dash-card-val" id="dStatus"></div></div>
       <div class="dash-card"><div class="dash-card-lbl">Requirements Met</div><div class="dash-card-val" id="dReqs"></div></div>
       <div class="dash-card"><div class="dash-card-lbl">Entropy</div><div class="dash-card-val" id="dEntropy"></div></div>
     </div>
-
     <div class="dash-prog-wrap">
       <div class="dash-prog-head"><span>Password Strength Score</span><span id="dProgLbl" style="font-family:var(--mono)"></span></div>
       <div class="dash-prog-track"><div class="dash-prog-fill" id="dProgFill"></div></div>
       <div class="dash-prog-labs"><span>Weak</span><span>Fair</span><span>Good</span><span>Strong</span></div>
     </div>
-
     <div class="pass-reveal-row">
       <div><div class="pass-reveal-lbl">Registered Password</div><div class="pass-reveal-val" id="dPassVal"></div></div>
       <button class="reveal-btn" id="dRevealBtn" onclick="toggleReveal()">Show</button>
     </div>
-
     <button class="logout-btn" onclick="doLogout()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Sign Out
     </button>
   </div>
 </div>
 
-<!-- ════════════ PAGE: TIPS ════════════ -->
-<div class="page fade-up" id="page-tips">
-  <div class="section-title">Security Tips</div>
-  <div class="section-sub">Best practices for staying secure online</div>
+<!-- ════════════ TIPS ════════════ -->
+<div class="page" id="page-tips">
+  <div class="sec-head">
+    <div class="sec-title">Security Tips</div>
+    <div class="sec-sub">Best practices every user should know</div>
+  </div>
   <div class="tips-grid">
-    <div class="tip-card"><div class="tip-icon" style="background:#eff4ff">🔒</div><div class="tip-title">Use a Password Manager</div><div class="tip-body">Tools like Bitwarden, 1Password, or KeePass generate and store unique passwords for every site, so you only need to remember one master password.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#ecfdf5">📏</div><div class="tip-title">Length Beats Complexity</div><div class="tip-body">A 20-character password made of random words is far stronger than an 8-character complex one. Every extra character multiplies the difficulty exponentially.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#fffbeb">🚫</div><div class="tip-title">Never Reuse Passwords</div><div class="tip-body">If one site is breached and you reuse passwords, attackers use "credential stuffing" to access all your other accounts automatically.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#fef2f2">📱</div><div class="tip-title">Enable 2-Factor Authentication</div><div class="tip-body">Even if someone steals your password, 2FA (via an authenticator app, not SMS) makes your account nearly impossible to compromise.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#f5f3ff">🕵️</div><div class="tip-title">Watch for Phishing</div><div class="tip-body">Many breaches start with phishing emails. Always verify the sender's address and never enter your password on a suspicious page.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#ecfdf5">🔄</div><div class="tip-title">Update Compromised Passwords</div><div class="tip-body">Regularly check HaveIBeenPwned for your email. If a breach is detected, change that password immediately — and any account where it was reused.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#eff4ff">🧱</div><div class="tip-title">Avoid Personal Information</div><div class="tip-body">Names, birthdays, pet names, and phone numbers are the first things attackers guess. They're easily found from social media and public records.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#fffbeb">⌨️</div><div class="tip-title">Avoid Keyboard Patterns</div><div class="tip-body">Patterns like "qwerty", "123456", "asdfgh" are in every hacker's dictionary. Even substituting numbers (p@ssw0rd) doesn't help — those tricks are well known.</div></div>
-    <div class="tip-card"><div class="tip-icon" style="background:#fef2f2">☁️</div><div class="tip-title">Secure Your Recovery Options</div><div class="tip-body">Your password reset email and phone number are as important as your password. Use a strong, unique password for your main email account above all else.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--accent-glow)">🔒</div><div class="tip-title">Use a Password Manager</div><div class="tip-body">Tools like Bitwarden, 1Password, or KeePass generate and store unique passwords for every site, so you only remember one master password.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--green-bg)">📏</div><div class="tip-title">Length Beats Complexity</div><div class="tip-body">A 20-character password made of random words is far stronger than an 8-character complex one. Every extra character multiplies difficulty exponentially.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--yellow-bg)">🚫</div><div class="tip-title">Never Reuse Passwords</div><div class="tip-body">If one site is breached and you reuse passwords, attackers use "credential stuffing" to access all your other accounts automatically.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--red-bg)">📱</div><div class="tip-title">Enable 2-Factor Authentication</div><div class="tip-body">Even if someone steals your password, 2FA via an authenticator app makes your account nearly impossible to compromise.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:rgba(167,139,250,.1)">🕵️</div><div class="tip-title">Watch for Phishing</div><div class="tip-body">Many breaches start with phishing emails. Always verify the sender's address and never enter your password on a suspicious page.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--green-bg)">🔄</div><div class="tip-title">Update Compromised Passwords</div><div class="tip-body">Regularly check HaveIBeenPwned for your email. If a breach is detected, change that password immediately on all sites where it was used.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--accent-glow)">🧱</div><div class="tip-title">Avoid Personal Information</div><div class="tip-body">Names, birthdays, pet names, and phone numbers are the first things attackers guess. They're easily found from social media and public records.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--yellow-bg)">⌨️</div><div class="tip-title">Avoid Keyboard Patterns</div><div class="tip-body">Patterns like "qwerty", "123456", "asdfgh" are in every hacker's dictionary. Even substitutions like p@ssw0rd are well known to attackers.</div></div>
+    <div class="tip-card"><div class="tip-icon" style="background:var(--red-bg)">☁️</div><div class="tip-title">Secure Your Recovery Options</div><div class="tip-body">Your password reset email is as critical as your password itself. Use a strong, unique password for your primary email account above all else.</div></div>
   </div>
 </div>
 
-<!-- ════════════ PAGE: QUIZ ════════════ -->
-<div class="page fade-up" id="page-quiz">
-  <div class="section-title">Security Quiz</div>
-  <div class="section-sub">Test your password security knowledge</div>
+<!-- ════════════ QUIZ ════════════ -->
+<div class="page" id="page-quiz">
+  <div class="sec-head">
+    <div class="sec-title">Security Knowledge Quiz</div>
+    <div class="sec-sub">Test your understanding of password security fundamentals</div>
+  </div>
   <div class="quiz-wrap">
     <div class="quiz-card">
-      <div class="quiz-progress"><div class="quiz-prog-fill" id="quizProgFill" style="width:0%"></div></div>
+      <div class="quiz-progress-row">
+        <div class="quiz-prog-track"><div class="quiz-prog-fill" id="quizProgFill" style="width:0%"></div></div>
+        <div class="quiz-prog-label" id="quizProgLabel">1 / 8</div>
+      </div>
       <div id="quizContent"></div>
     </div>
   </div>
@@ -845,387 +987,530 @@ canvas{border-radius:var(--r-sm)}
 </main>
 
 <footer class="footer">
-  PassGuard Pro — Built with HTML, CSS & JavaScript &nbsp;·&nbsp; NS-CSC 219 Group Project &nbsp;·&nbsp; NSUK Computer Science
+  <strong>PassGuard Pro</strong> — Built with HTML, CSS & JavaScript &nbsp;·&nbsp; NS-CSC 219 Group Project &nbsp;·&nbsp; Department of Computer Science, NSUK
 </footer>
 </div>
 
 <script>
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 // THEME
-// ──────────────────────────────────────
-const savedTheme = localStorage.getItem('pg-theme') || 'light';
+// ══════════════════════════════════════
+const savedTheme = localStorage.getItem('pg-theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
 function toggleTheme() {
-  const t = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', t);
-  localStorage.setItem('pg-theme', t);
-  const icon = document.getElementById('themeIcon');
-  icon.innerHTML = t === 'dark'
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('pg-theme', next);
+  updateThemeIcon(next);
+}
+function updateThemeIcon(t) {
+  document.getElementById('themeIcon').innerHTML = t === 'dark'
     ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
     : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
 }
-if (savedTheme === 'dark') toggleTheme(); toggleTheme(); // apply correct icon on load
-if (savedTheme === 'dark') { document.documentElement.setAttribute('data-theme','dark'); }
+updateThemeIcon(savedTheme);
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 // NAVIGATION
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 function goPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t => {
-    if (t.textContent.toLowerCase().includes(id.slice(0,4))) t.classList.add('active');
-  });
+  const nt = document.getElementById('nt-' + id);
+  if (nt) nt.classList.add('active');
+  const mn = document.getElementById('mn-' + id);
+  if (mn) mn.classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
+// CORE ANALYSIS ENGINE
+// ══════════════════════════════════════
+const COMMON = ['password','123456','qwerty','abc123','letmein','monkey','dragon','master','shadow','sunshine','princess','welcome','login','admin','passw0rd','p@ssword','password1','iloveyou','111111','654321'];
+
+function calcEntropy(p) {
+  if (!p) return 0;
+  let cs = 0;
+  if (/[a-z]/.test(p)) cs += 26;
+  if (/[A-Z]/.test(p)) cs += 26;
+  if (/[0-9]/.test(p)) cs += 10;
+  if (/[^a-zA-Z0-9]/.test(p)) cs += 32;
+  return Math.round(p.length * Math.log2(cs));
+}
+
+function crackTime(entropy) {
+  const guesses = Math.pow(2, Math.min(entropy, 128));
+  const gps = 1e10; // 10 billion guesses/sec
+  const secs = guesses / gps / 2;
+  if (secs < 0.001) return 'Instantly';
+  if (secs < 1) return 'Less than a second';
+  if (secs < 60) return Math.round(secs) + ' seconds';
+  if (secs < 3600) return Math.round(secs/60) + ' minutes';
+  if (secs < 86400) return Math.round(secs/3600) + ' hours';
+  if (secs < 86400*30) return Math.round(secs/86400) + ' days';
+  if (secs < 86400*365) return Math.round(secs/86400/30) + ' months';
+  if (secs < 86400*365*1000) return Math.round(secs/86400/365) + ' years';
+  if (secs < 86400*365*1e6) return Math.round(secs/86400/365/1000) + ' thousand years';
+  return 'Millions of years';
+}
+
+function detectPatterns(p) {
+  const warns = [];
+  const l = p.toLowerCase();
+  if (COMMON.includes(l)) warns.push('Common password — in every hacker dictionary');
+  if (/(.)\1{2,}/.test(p)) warns.push('Repeated characters detected (e.g. aaa, 111)');
+  if (/^[a-z]+$/i.test(p) && p.length < 12) warns.push('Only letters — add numbers and symbols');
+  if (/^[0-9]+$/.test(p)) warns.push('Only numbers — very easy to brute-force');
+  if (/qwerty|asdf|zxcv|qazwsx|1234|abcd|zyxw/i.test(p)) warns.push('Keyboard walk pattern detected');
+  if (/(.+)\1+/.test(p) && p.length > 4) warns.push('Repetitive sequence pattern found');
+  const yr = /19[5-9]\d|20[0-2]\d/.exec(p);
+  if (yr) warns.push('Year ' + yr[0] + ' detected — avoid dates');
+  return warns;
+}
+
+function scoreToLevel(score, len) {
+  if (score === 0) return 0;
+  if (score <= 1) return 1;
+  if (score <= 2) return 2;
+  if (score <= 3) return 3;
+  if (score <= 4 && len < 12) return 4;
+  if (score <= 4) return 4;
+  if (score === 5 && len < 12) return 5;
+  return 6;
+}
+
+function getStrengthConfig(level) {
+  const cfg = [
+    {label:'—',          color:'var(--text3)',  meterColor:'var(--border2)',   pct:0},
+    {label:'Very Weak',  color:'var(--red)',    meterColor:'#f43f5e',          pct:14},
+    {label:'Weak',       color:'var(--orange)', meterColor:'#fb923c',          pct:28},
+    {label:'Fair',       color:'var(--yellow)', meterColor:'#f59e0b',          pct:45},
+    {label:'Moderate',   color:'var(--yellow)', meterColor:'#eab308',          pct:60},
+    {label:'Good',       color:'#34d399',       meterColor:'#34d399',          pct:78},
+    {label:'Strong',     color:'var(--green)',  meterColor:'#22d3a0',          pct:100},
+  ];
+  return cfg[level];
+}
+
+let lastScore = 0;
+let passHistory = [];
+
+function fullAnalyze(val) {
+  const p = val;
+  const len = p.length;
+  const hasUpper = /[A-Z]/.test(p);
+  const hasLower = /[a-z]/.test(p);
+  const hasNum = /[0-9]/.test(p);
+  const hasSym = /[^a-zA-Z0-9]/.test(p);
+  const isLong = len >= 12;
+  const isLen = len >= 8;
+
+  let score = 0;
+  if (isLen) score++;
+  if (hasUpper) score++;
+  if (hasLower) score++;
+  if (hasNum) score++;
+  if (hasSym) score++;
+  if (isLong) score++;
+  lastScore = score;
+
+  const entropy = calcEntropy(p);
+  const level = scoreToLevel(score, len);
+  const cfg = getStrengthConfig(level);
+
+  // Meter
+  const meterEl = document.getElementById('mainMeter');
+  meterEl.style.width = (p.length > 0 ? cfg.pct : 0) + '%';
+  meterEl.style.background = cfg.meterColor;
+  meterEl.classList.toggle('has-val', p.length > 0);
+
+  document.getElementById('mainLabel').textContent = p.length > 0 ? cfg.label : 'No password entered';
+  document.getElementById('mainLabel').style.color = p.length > 0 ? cfg.color : 'var(--text3)';
+  document.getElementById('mainScore').textContent = p.length > 0 ? score + '/6 criteria' : '';
+
+  // Stats
+  let cs = 0;
+  if (hasLower) cs += 26; if (hasUpper) cs += 26;
+  if (hasNum) cs += 10; if (hasSym) cs += 32;
+  document.getElementById('statLen').textContent = len;
+  document.getElementById('statLen').style.color = len >= 12 ? 'var(--green)' : len >= 8 ? 'var(--yellow)' : 'var(--red)';
+  document.getElementById('statEntropy').textContent = entropy;
+  document.getElementById('statEntropy').style.color = entropy >= 60 ? 'var(--green)' : entropy >= 36 ? 'var(--yellow)' : 'var(--red)';
+  document.getElementById('statCharset').textContent = cs || '—';
+  document.getElementById('statCharset').style.color = cs >= 72 ? 'var(--green)' : cs >= 36 ? 'var(--yellow)' : 'var(--text3)';
+
+  // Crack time
+  document.getElementById('crackTime').textContent = len > 0 ? crackTime(entropy) : 'Enter a password above';
+
+  // Requirements
+  const reqs = {len: isLen, upper: hasUpper, lower: hasLower, num: hasNum, sym: hasSym, long: isLong};
+  let met = 0;
+  for (const [k, v] of Object.entries(reqs)) {
+    document.getElementById('req-' + k).classList.toggle('met', v);
+    if (v) met++;
+  }
+  document.getElementById('reqCount').textContent = met + '/6';
+
+  // Patterns
+  const pl = document.getElementById('patternList');
+  if (!p.length) {
+    pl.innerHTML = '<div class="pattern-ok">✓ No dangerous patterns detected</div>';
+  } else {
+    const warns = detectPatterns(p);
+    if (warns.length === 0) {
+      pl.innerHTML = '<div class="pattern-ok">✓ No dangerous patterns detected</div>';
+    } else {
+      pl.innerHTML = warns.map(w => `<div class="pattern-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>${w}</div>`).join('');
+    }
+  }
+
+  // Composition
+  const upper = (p.match(/[A-Z]/g)||[]).length;
+  const lower = (p.match(/[a-z]/g)||[]).length;
+  const nums = (p.match(/[0-9]/g)||[]).length;
+  const syms = len - upper - lower - nums;
+  const setBar = (id, countId, count) => {
+    document.getElementById(id).style.width = len > 0 ? Math.max(count / len * 100, 2) + '%' : '0%';
+    document.getElementById(countId).textContent = count;
+  };
+  setBar('compUpper','compUpperN', upper);
+  setBar('compLower','compLowerN', lower);
+  setBar('compNum','compNumN', nums);
+  setBar('compSym','compSymN', syms);
+
+  // Tip
+  let tip = '';
+  if (!p.length) tip = 'Start typing a password to get personalized security suggestions.';
+  else if (!isLen) tip = '⬆️ Add more characters — password needs at least 8 to be viable.';
+  else if (!hasUpper) tip = '⬆️ Add an uppercase letter (A–Z) to significantly boost strength.';
+  else if (!hasLower) tip = '⬆️ Mix in lowercase letters for a more balanced character set.';
+  else if (!hasNum) tip = '⬆️ Include a number (0–9) to expand the possible combinations.';
+  else if (!hasSym) tip = '⬆️ Adding a symbol like !@#$ dramatically increases entropy. Try it!';
+  else if (!isLong) tip = '⬆️ Excellent so far — push to 12+ characters for maximum security.';
+  else if (entropy < 60) tip = '💪 Good foundation! More random characters will push entropy above 60 bits.';
+  else tip = '🏆 Excellent password! High entropy, diverse charset, and good length.';
+  document.getElementById('tipText').textContent = tip;
+
+  // History
+  updateHistory(p, cfg.label, level);
+
+  // Chart
+  entropyHistory.push(entropy);
+  if (entropyHistory.length > 40) entropyHistory.shift();
+  drawChart();
+}
+
+// ══════════════════════════════════════
+// SESSION HISTORY
+// ══════════════════════════════════════
+let passHistory2 = [];
+function updateHistory(p, label, level) {
+  if (!p) return;
+  const existing = passHistory2.findIndex(h => h.pass === p);
+  if (existing > -1) passHistory2.splice(existing, 1);
+  passHistory2.unshift({ pass: p.length > 2 ? p[0] + '•'.repeat(p.length - 2) + p.slice(-1) : '••', label, level });
+  if (passHistory2.length > 8) passHistory2.pop();
+  renderHistory();
+}
+function renderHistory() {
+  const el = document.getElementById('historyList');
+  if (passHistory2.length === 0) {
+    el.innerHTML = '<div class="history-empty">No passwords analyzed yet</div>';
+    return;
+  }
+  const badgeClass = l => l >= 5 ? 'badge-green' : l >= 3 ? 'badge-yellow' : 'badge-red';
+  el.innerHTML = passHistory2.map(h => `
+    <div class="history-item">
+      <div class="history-pass">${h.pass}</div>
+      <span class="badge ${badgeClass(h.level)} history-badge">${h.label}</span>
+    </div>
+  `).join('');
+}
+function clearHistory() {
+  passHistory2 = [];
+  renderHistory();
+}
+
+// ══════════════════════════════════════
 // ENTROPY CHART
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 const entropyHistory = [];
 const chartCanvas = document.getElementById('entropyChart');
 const ctx = chartCanvas.getContext('2d');
 function resizeChart() {
   chartCanvas.width = chartCanvas.parentElement.offsetWidth;
-  chartCanvas.height = 120;
+  chartCanvas.height = 110;
   drawChart();
 }
 function drawChart() {
   const w = chartCanvas.width, h = chartCanvas.height;
-  ctx.clearRect(0,0,w,h);
+  ctx.clearRect(0, 0, w, h);
   if (entropyHistory.length < 2) {
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text3').trim();
-    ctx.font = '12px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(100,120,160,0.4)';
+    ctx.font = '12px Inter, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Type a password to see entropy chart', w/2, h/2);
+    ctx.fillText('Type a password to see entropy history', w/2, h/2);
     return;
   }
   const max = Math.max(...entropyHistory, 60);
   const pts = entropyHistory.map((v,i) => ({
-    x: (i / (entropyHistory.length-1)) * (w-20) + 10,
-    y: h - 10 - (v/max)*(h-20)
+    x: (i / (entropyHistory.length - 1)) * (w - 20) + 10,
+    y: h - 10 - (v/max) * (h - 20)
   }));
-  // Fill
-  const grad = ctx.createLinearGradient(0,0,0,h);
-  grad.addColorStop(0,'rgba(37,99,235,.3)');
-  grad.addColorStop(1,'rgba(37,99,235,.02)');
+  const grad = ctx.createLinearGradient(0, 0, 0, h);
+  grad.addColorStop(0, 'rgba(79,142,247,0.25)');
+  grad.addColorStop(1, 'rgba(79,142,247,0.02)');
   ctx.beginPath();
   ctx.moveTo(pts[0].x, h);
-  pts.forEach(p => ctx.lineTo(p.x,p.y));
+  pts.forEach(p => ctx.lineTo(p.x, p.y));
   ctx.lineTo(pts[pts.length-1].x, h);
   ctx.closePath();
   ctx.fillStyle = grad;
   ctx.fill();
-  // Line
   ctx.beginPath();
   ctx.moveTo(pts[0].x, pts[0].y);
-  pts.forEach(p => ctx.lineTo(p.x,p.y));
-  ctx.strokeStyle = '#2563eb';
+  for (let i = 1; i < pts.length; i++) {
+    const xc = (pts[i].x + pts[i-1].x) / 2;
+    const yc = (pts[i].y + pts[i-1].y) / 2;
+    ctx.quadraticCurveTo(pts[i-1].x, pts[i-1].y, xc, yc);
+  }
+  ctx.lineTo(pts[pts.length-1].x, pts[pts.length-1].y);
+  ctx.strokeStyle = 'var(--accent)';
   ctx.lineWidth = 2.5;
-  ctx.lineJoin = 'round';
   ctx.stroke();
-  // Last dot
-  const last = pts[pts.length-1];
+  const last = pts[pts.length - 1];
   ctx.beginPath();
-  ctx.arc(last.x, last.y, 4, 0, Math.PI*2);
-  ctx.fillStyle = '#2563eb';
+  ctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = 'var(--accent)';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(last.x, last.y, 7, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(79,142,247,0.25)';
   ctx.fill();
 }
 window.addEventListener('resize', resizeChart);
-setTimeout(resizeChart, 100);
+resizeChart();
 
-// ──────────────────────────────────────
-// CORE ANALYSIS ENGINE
-// ──────────────────────────────────────
-const COMMON_PASSWORDS = ['password','123456','password123','admin','letmein','welcome','monkey','dragon','master','123456789','qwerty','abc123','iloveyou','sunshine','princess','football','shadow','superman','michael','jessica','login','pass','test','1234','12345','111111','654321','000000'];
-
-function calcEntropy(val) {
-  let cs = 0;
-  if (/[a-z]/.test(val)) cs += 26;
-  if (/[A-Z]/.test(val)) cs += 26;
-  if (/[0-9]/.test(val)) cs += 10;
-  if (/[^a-zA-Z0-9]/.test(val)) cs += 32;
-  return val.length > 0 ? Math.round(val.length * Math.log2(cs || 1) * 10) / 10 : 0;
-}
-
-function calcCrackTime(entropy) {
-  if (entropy === 0) return '—';
-  // Assume 100 billion guesses/sec (high-end GPU cluster)
-  const guesses = Math.pow(2, entropy);
-  const secs = guesses / 1e11;
-  if (secs < 1) return 'Instantly';
-  if (secs < 60) return `${Math.round(secs)} seconds`;
-  if (secs < 3600) return `${Math.round(secs/60)} minutes`;
-  if (secs < 86400) return `${Math.round(secs/3600)} hours`;
-  if (secs < 86400*30) return `${Math.round(secs/86400)} days`;
-  if (secs < 86400*365) return `${Math.round(secs/86400/30)} months`;
-  if (secs < 86400*365*1000) return `${Math.round(secs/86400/365)} years`;
-  if (secs < 86400*365*1e6) return `${Math.round(secs/86400/365/1000)}K years`;
-  if (secs < 86400*365*1e9) return `${Math.round(secs/86400/365/1e6)}M years`;
-  return `${Math.round(secs/86400/365/1e9)}B+ years`;
-}
-
-function detectPatterns(val) {
-  const warns = [];
-  if (!val) return warns;
-  if (COMMON_PASSWORDS.includes(val.toLowerCase())) warns.push('This is one of the most common passwords');
-  if (/(.)\1{2,}/.test(val)) warns.push('Repeated characters detected (e.g. aaa, 111)');
-  if (/(?:abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)/i.test(val)) warns.push('Sequential letters detected (e.g. abc, xyz)');
-  if (/(?:123|234|345|456|567|678|789|890|012)/.test(val)) warns.push('Sequential numbers detected (e.g. 123, 456)');
-  if (/(?:qwerty|asdfgh|zxcvbn|qwert|asdfg|zxcvb)/i.test(val)) warns.push('Keyboard pattern detected (e.g. qwerty)');
-  if (/(?:19|20)\d{2}/.test(val)) warns.push('Year pattern detected — avoid dates');
-  if (/^[a-zA-Z]+\d{1,4}$/.test(val) && val.length < 12) warns.push('Word + number suffix is very predictable');
-  return warns;
-}
-
-function getStrengthConfig(level) {
-  const cfgs = [
-    {label:'No password',color:'var(--text3)',pct:0,meterColor:'#e2e8f0'},
-    {label:'Very Weak',color:'var(--red)',pct:12,meterColor:'#dc2626'},
-    {label:'Weak',color:'#ea580c',pct:28,meterColor:'#ea580c'},
-    {label:'Fair',color:'var(--yellow)',pct:50,meterColor:'#d97706'},
-    {label:'Good',color:'var(--accent)',pct:72,meterColor:'#2563eb'},
-    {label:'Strong',color:'var(--green)',pct:90,meterColor:'#059669'},
-    {label:'Very Strong',color:'#7c3aed',pct:100,meterColor:'#7c3aed'},
-  ];
-  return cfgs[Math.min(level, 6)];
-}
-
-function scoreToLevel(score, length) {
-  if (length === 0) return 0;
-  if (score <= 1) return 1;
-  if (score === 2) return 2;
-  if (score === 3) return 3;
-  if (score === 4) return 4;
-  if (score === 5) return 5;
-  return 6;
-}
-
-let lastScore = 0;
-function fullAnalyze(val) {
-  const rules = {
-    len:   val.length >= 8,
-    upper: /[A-Z]/.test(val),
-    lower: /[a-z]/.test(val),
-    num:   /[0-9]/.test(val),
-    sym:   /[^a-zA-Z0-9]/.test(val),
-    long:  val.length >= 12,
-  };
-  const score = Object.values(rules).filter(Boolean).length;
-  lastScore = score;
-  const level = scoreToLevel(score, val.length);
-  const cfg = getStrengthConfig(level);
-
-  // Meter
-  document.getElementById('mainMeter').style.width = cfg.pct + '%';
-  document.getElementById('mainMeter').style.background = cfg.meterColor;
-  document.getElementById('mainLabel').textContent = cfg.label;
-  document.getElementById('mainLabel').style.color = cfg.color;
-  document.getElementById('mainScore').textContent = val.length > 0 ? `${score}/6 criteria` : '';
-
-  // Requirements
-  Object.entries(rules).forEach(([k, met]) => {
-    document.getElementById('req-' + k)?.classList.toggle('met', met);
-  });
-  document.getElementById('reqCount').textContent = `${score}/6`;
-
-  // Stats
-  const entropy = calcEntropy(val);
-  let cs = 0;
-  if (/[a-z]/.test(val)) cs += 26;
-  if (/[A-Z]/.test(val)) cs += 26;
-  if (/[0-9]/.test(val)) cs += 10;
-  if (/[^a-zA-Z0-9]/.test(val)) cs += 32;
-
-  document.getElementById('statLen').textContent = val.length;
-  document.getElementById('statLen').style.color = val.length >= 12 ? 'var(--green)' : val.length >= 8 ? 'var(--yellow)' : 'var(--red)';
-  document.getElementById('statEntropy').textContent = entropy;
-  document.getElementById('statEntropy').style.color = entropy >= 60 ? 'var(--green)' : entropy >= 40 ? 'var(--yellow)' : val.length > 0 ? 'var(--red)' : 'var(--text3)';
-  document.getElementById('statCharset').textContent = cs;
-  document.getElementById('statCharset').style.color = cs >= 62 ? 'var(--green)' : cs >= 36 ? 'var(--yellow)' : val.length > 0 ? 'var(--red)' : 'var(--text3)';
-
-  // Crack time
-  document.getElementById('crackTime').textContent = calcCrackTime(entropy);
-
-  // Patterns
-  const patterns = detectPatterns(val);
-  const pl = document.getElementById('patternList');
-  if (patterns.length === 0 || val.length === 0) {
-    pl.innerHTML = '<div class="pattern-ok">✓ No dangerous patterns detected</div>';
-  } else {
-    pl.innerHTML = patterns.map(p => `<div class="pattern-item"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>${p}</div>`).join('');
-  }
-
-  // Composition
-  const upper = (val.match(/[A-Z]/g)||[]).length;
-  const lower = (val.match(/[a-z]/g)||[]).length;
-  const num   = (val.match(/[0-9]/g)||[]).length;
-  const sym   = (val.match(/[^a-zA-Z0-9]/g)||[]).length;
-  const total = val.length || 1;
-  document.getElementById('compUpper').style.width  = (upper/total*100) + '%';
-  document.getElementById('compLower').style.width  = (lower/total*100) + '%';
-  document.getElementById('compNum').style.width    = (num/total*100) + '%';
-  document.getElementById('compSym').style.width    = (sym/total*100) + '%';
-  document.getElementById('compUpperN').textContent = upper;
-  document.getElementById('compLowerN').textContent = lower;
-  document.getElementById('compNumN').textContent   = num;
-  document.getElementById('compSymN').textContent   = sym;
-
-  // Entropy chart
-  if (val.length === 0) { entropyHistory.length = 0; }
-  else { entropyHistory.push(entropy); if (entropyHistory.length > 50) entropyHistory.shift(); }
-  drawChart();
-
-  // Improvement tip
-  const tips = [];
-  if (!rules.len) tips.push('Make it at least 8 characters long.');
-  else if (!rules.long) tips.push('Extend to 12+ characters — each extra character multiplies crack time significantly.');
-  if (!rules.upper) tips.push('Add at least one uppercase letter (A–Z).');
-  if (!rules.lower) tips.push('Add at least one lowercase letter (a–z).');
-  if (!rules.num) tips.push('Include a number (0–9).');
-  if (!rules.sym) tips.push('Add a special character like @, #, !, or %.');
-  if (patterns.length > 0) tips.push('Avoid predictable patterns — use random characters instead.');
-  if (entropy > 70) tips.push('Excellent entropy! Your password is very strong. Consider saving it in a password manager.');
-  document.getElementById('tipText').textContent = tips[0] || 'Your password looks great! Make sure you store it safely.';
-}
-
-// ──────────────────────────────────────
-// MINI METER (Auth page)
-// ──────────────────────────────────────
-function miniAnalyze(val) {
-  const rules = { len:val.length>=8,upper:/[A-Z]/.test(val),lower:/[a-z]/.test(val),num:/[0-9]/.test(val),sym:/[^a-zA-Z0-9]/.test(val),long:val.length>=12 };
-  const score = Object.values(rules).filter(Boolean).length;
-  const level = scoreToLevel(score, val.length);
-  const cfg = getStrengthConfig(level);
-  const colors = ['#e2e8f0','#dc2626','#ea580c','#d97706','#2563eb','#059669','#7c3aed'];
-  for (let i=1;i<=4;i++) {
-    const bar = document.getElementById('mb'+i);
-    bar.style.background = i <= Math.ceil(level*4/6) ? colors[level] : 'var(--surface3)';
-  }
-  document.getElementById('miniLabel').textContent = val.length===0 ? 'Enter password' : cfg.label;
-  document.getElementById('miniLabel').style.color = cfg.color;
-  document.getElementById('miniScore').textContent = val.length > 0 ? `${score}/6` : '';
-  lastScore = score;
-}
-
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 // TOGGLE PASSWORD VISIBILITY
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 function togglePassVis(id, btn) {
   const inp = document.getElementById(id);
-  inp.type = inp.type==='password' ? 'text' : 'password';
-  const isText = inp.type==='text';
+  const isText = inp.type === 'text';
+  inp.type = isText ? 'password' : 'text';
   btn.innerHTML = isText
-    ? `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
-    : `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>'
+    : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
 }
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
+// EXPORT REPORT
+// ══════════════════════════════════════
+function exportReport() {
+  const pass = document.getElementById('mainPass').value;
+  const entropy = calcEntropy(pass);
+  const crack = crackTime(entropy);
+  const len = pass.length;
+  let cs = 0;
+  if (/[a-z]/.test(pass)) cs += 26; if (/[A-Z]/.test(pass)) cs += 26;
+  if (/[0-9]/.test(pass)) cs += 10; if (/[^a-zA-Z0-9]/.test(pass)) cs += 32;
+  const reqs = {
+    '8+ characters': len >= 8,
+    'Uppercase (A–Z)': /[A-Z]/.test(pass),
+    'Lowercase (a–z)': /[a-z]/.test(pass),
+    'Number (0–9)': /[0-9]/.test(pass),
+    'Special character': /[^a-zA-Z0-9]/.test(pass),
+    '12+ characters': len >= 12
+  };
+  const met = Object.values(reqs).filter(Boolean).length;
+  const level = scoreToLevel(met, len);
+  const cfg = getStrengthConfig(level);
+  const patterns = pass ? detectPatterns(pass) : [];
+  const now = new Date().toLocaleString();
+
+  const content = `
+PASSGUARD PRO — SECURITY ANALYSIS REPORT
+==========================================
+Generated: ${now}
+Project: NS-CSC 219 Group Project — Nasarawa State University, Keffi
+
+PASSWORD METRICS
+-----------------
+Strength Level : ${cfg.label}
+Length         : ${len} characters
+Entropy        : ${entropy} bits
+Charset Size   : ${cs}
+Crack Time     : ${crack}
+Score          : ${met}/6 criteria met
+
+REQUIREMENTS CHECK
+-------------------
+${Object.entries(reqs).map(([k,v]) => `${v ? '[✓]' : '[ ]'} ${k}`).join('\n')}
+
+PATTERN ANALYSIS
+-----------------
+${patterns.length === 0 ? 'No dangerous patterns detected.' : patterns.map(p => '⚠ ' + p).join('\n')}
+
+RECOMMENDATIONS
+----------------
+${met < 3 ? '→ This password is weak. Do not use it for important accounts.' : ''}
+${met < 5 ? '→ Consider adding more character types to improve strength.' : ''}
+${entropy < 40 ? '→ Low entropy — this password can be cracked quickly.' : ''}
+${entropy >= 60 && met >= 5 ? '→ Strong password. Store it securely with a password manager.' : ''}
+${len < 12 ? '→ Extend to at least 12 characters for better security.' : ''}
+
+--
+PassGuard Pro | NS-CSC 219 | Dept. of Computer Science, NSUK
+  `.trim();
+
+  const blob = new Blob([content], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'PassGuard_Security_Report.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ══════════════════════════════════════
 // GENERATOR
-// ──────────────────────────────────────
-const genOpts = { upper:true, lower:true, num:true, sym:true, noambig:false };
+// ══════════════════════════════════════
 let genType = 'random';
-const WORDS = ['correct','horse','battery','staple','cloud','river','mountain','sunset','forest','ocean','thunder','silver','golden','crystal','marble','velvet','shadow','phantom','falcon','tiger','cobra','eagle','wolf','lion','storm','blaze','frost','ember','spark','nova','orbit','comet','lunar','solar','prism','axiom','cipher','delta','echo','foxtrot','gamma','helix','indigo','jaguar','krypto','lambda','matrix','nexus','omega','pulsar','quartz','radar','sigma','tango','ultra','vortex','xenon','yield','zenith'];
+const genOpts = { upper: true, lower: true, num: true, sym: true, noambig: false };
+
 function setGenType(t) {
   genType = t;
-  ['random','passphrase','pronounce'].forEach(x => document.getElementById('type'+x.charAt(0).toUpperCase()+x.slice(1)).classList.toggle('active', x===t));
-  document.getElementById('charToggles').style.display = t==='random' ? 'grid' : 'none';
-  document.getElementById('charToggleLabel').style.display = t==='random' ? 'block' : 'none';
+  ['random','passphrase','pronounce'].forEach(k => {
+    document.getElementById('type' + k.charAt(0).toUpperCase() + k.slice(1)).classList.toggle('active', k === t);
+  });
+  const showToggles = t === 'random';
+  document.getElementById('charToggles').style.display = showToggles ? 'grid' : 'none';
+  document.getElementById('charToggleLabel').style.display = showToggles ? 'block' : 'none';
 }
+
 function toggleOpt(k) {
   genOpts[k] = !genOpts[k];
-  document.getElementById('tog-'+k).classList.toggle('on', genOpts[k]);
+  document.getElementById('tog-' + k).classList.toggle('on', genOpts[k]);
 }
+
 function generatePassword() {
+  const len = parseInt(document.getElementById('lenSlider').value);
   let pass = '';
+
   if (genType === 'passphrase') {
-    const count = Math.max(3, Math.floor(document.getElementById('lenSlider').value / 5));
-    pass = Array.from({length:count}, () => WORDS[Math.floor(Math.random()*WORDS.length)]).join('-');
+    const words = ['correct','horse','battery','staple','cloud','river','storm','blade','echo','swift','lunar','forge','amber','delta','prism','nexus','sigma','atlas','orbit','nova','blaze','cyber','frost','gloom','haven','ivory','jade','kite','lyric','mango'];
+    const count = Math.max(3, Math.round(len / 6));
+    const picked = [];
+    for (let i = 0; i < count; i++) picked.push(words[Math.floor(Math.random() * words.length)]);
+    pass = picked.join('-');
+    const nums = Math.floor(Math.random() * 90) + 10;
+    pass += '-' + nums;
   } else if (genType === 'pronounce') {
-    const cons='bcdfghjklmnprstvwxyz', vow='aeiou';
-    const len = parseInt(document.getElementById('lenSlider').value);
-    for (let i=0;i<len;i++) pass += i%2===0 ? cons[Math.floor(Math.random()*cons.length)] : vow[Math.floor(Math.random()*vow.length)];
-    pass = pass.charAt(0).toUpperCase() + pass.slice(1) + Math.floor(Math.random()*90+10);
+    const cons = 'bcdfghjklmnpqrstvwxyz';
+    const vowels = 'aeiou';
+    while (pass.length < len) {
+      pass += cons[Math.floor(Math.random() * cons.length)];
+      pass += vowels[Math.floor(Math.random() * vowels.length)];
+    }
+    pass = pass.substring(0, len);
+    pass = pass.charAt(0).toUpperCase() + pass.slice(1);
+    pass += Math.floor(Math.random() * 90) + 10;
+    pass += '!';
   } else {
     let chars = '';
-    if (genOpts.upper) chars += 'ABCDEFGHJKLMNPQRSTUVWXYZ' + (genOpts.noambig ? '' : 'IO');
-    if (genOpts.lower) chars += 'abcdefghjkmnpqrstuvwxyz' + (genOpts.noambig ? '' : 'lio');
-    if (genOpts.num) chars += (genOpts.noambig ? '23456789' : '0123456789');
-    if (genOpts.sym) chars += '!@#$%^&*()-_=+[]{}|;:,.<>?';
+    const ambig = 'O0l1I';
+    if (genOpts.upper) { let s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; if (genOpts.noambig) s = s.split('').filter(c => !ambig.includes(c)).join(''); chars += s; }
+    if (genOpts.lower) { let s = 'abcdefghijklmnopqrstuvwxyz'; if (genOpts.noambig) s = s.split('').filter(c => !ambig.includes(c)).join(''); chars += s; }
+    if (genOpts.num) { let s = '0123456789'; if (genOpts.noambig) s = s.split('').filter(c => !ambig.includes(c)).join(''); chars += s; }
+    if (genOpts.sym) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
     if (!chars) chars = 'abcdefghijklmnopqrstuvwxyz';
-    const len = parseInt(document.getElementById('lenSlider').value);
     const arr = new Uint32Array(len);
     crypto.getRandomValues(arr);
-    pass = Array.from(arr).map(v => chars[v % chars.length]).join('');
+    for (let i = 0; i < len; i++) pass += chars[arr[i] % chars.length];
   }
+
   document.getElementById('genOutput').textContent = pass;
   document.getElementById('genOutput').style.color = 'var(--text)';
-  document.getElementById('genOutput').style.fontSize = pass.length > 30 ? '13px' : '16px';
-  document.getElementById('genCopyBtn').textContent = 'Copy';
-  document.getElementById('genCopyBtn').classList.remove('copied');
+  document.getElementById('genOutput').style.fontSize = pass.length > 30 ? '13px' : '17px';
 
   // Show strength
-  const sw = document.getElementById('genStrengthWrap');
-  sw.style.display = 'block';
-  const rules = { len:pass.length>=8,upper:/[A-Z]/.test(pass),lower:/[a-z]/.test(pass),num:/[0-9]/.test(pass),sym:/[^a-zA-Z0-9]/.test(pass),long:pass.length>=12 };
-  const score = Object.values(rules).filter(Boolean).length;
-  const level = scoreToLevel(score, pass.length);
-  const cfg = getStrengthConfig(level);
+  const ent = calcEntropy(pass);
+  let sc = 0;
+  if (pass.length >= 8) sc++; if (/[A-Z]/.test(pass)) sc++; if (/[a-z]/.test(pass)) sc++;
+  if (/[0-9]/.test(pass)) sc++; if (/[^a-zA-Z0-9]/.test(pass)) sc++; if (pass.length >= 12) sc++;
+  const lv = scoreToLevel(sc, pass.length);
+  const cfg = getStrengthConfig(lv);
   document.getElementById('genMeter').style.width = cfg.pct + '%';
   document.getElementById('genMeter').style.background = cfg.meterColor;
-  document.getElementById('genLabel').textContent = cfg.label;
+  document.getElementById('genLabel').textContent = cfg.label + ' · ' + ent + ' bits entropy';
   document.getElementById('genLabel').style.color = cfg.color;
 }
+
 function copyGenerated() {
-  const val = document.getElementById('genOutput').textContent;
-  if (!val || val.includes('Click generate')) return;
-  navigator.clipboard.writeText(val).then(() => {
+  const pass = document.getElementById('genOutput').textContent;
+  if (pass === 'Click generate to create a password') return;
+  navigator.clipboard.writeText(pass).then(() => {
     const btn = document.getElementById('genCopyBtn');
-    btn.textContent = '✓ Copied!';
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
     btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
   });
 }
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 // BREACH CHECK
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 async function sha1(str) {
   const buf = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('').toUpperCase();
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
 }
+
 async function checkBreach() {
   const pass = document.getElementById('breachPass').value;
-  if (!pass) return;
   const res = document.getElementById('breachResult');
-  res.className = 'breach-result';
+  if (!pass) return;
   res.style.display = 'block';
-  res.innerHTML = `<div style="display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)"><div class="loading-dots"><span></span><span></span><span></span></div> Checking securely…</div>`;
+  res.className = 'breach-result';
+  document.getElementById('breachIcon').textContent = '';
+  document.getElementById('breachTitle').textContent = '';
+  document.getElementById('breachBody').innerHTML = '<div style="display:flex;align-items:center;gap:10px;color:var(--text2)"><div class="loading-dots"><span></span><span></span><span></span></div> Checking breach database…</div>';
+
   try {
     const hash = await sha1(pass);
-    const prefix = hash.slice(0,5);
-    const suffix = hash.slice(5);
-    const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
-    const text = await response.text();
-    const lines = text.split('\n');
-    const found = lines.find(l => l.toUpperCase().startsWith(suffix));
+    const prefix = hash.substring(0, 5);
+    const suffix = hash.substring(5);
+    const resp = await fetch('https://api.pwnedpasswords.com/range/' + prefix);
+    if (!resp.ok) throw new Error('API error');
+    const text = await resp.text();
+    const lines = text.split('\r\n');
+    const found = lines.find(l => l.startsWith(suffix));
+
     if (found) {
-      const count = parseInt(found.split(':')[1].trim());
+      const count = found.split(':')[1];
       res.className = 'breach-result pwned';
-      res.innerHTML = `<div class="breach-result-head"><div class="breach-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="breach-result-title">Password Compromised!</div></div><div class="breach-result-body">This password has appeared <strong>${count.toLocaleString()} times</strong> in known data breaches. You should <strong>never use this password</strong> for any account. Change it immediately on any site where you use it.</div>`;
+      document.getElementById('breachIcon').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>';
+      document.getElementById('breachTitle').textContent = 'Password Compromised!';
+      document.getElementById('breachBody').innerHTML = `This password has appeared in data breaches <strong>${parseInt(count).toLocaleString()} times</strong>. It is known to attackers and should never be used. Change it immediately on any account that uses it.`;
     } else {
       res.className = 'breach-result safe';
-      res.innerHTML = `<div class="breach-result-head"><div class="breach-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="breach-result-title">No Breaches Found</div></div><div class="breach-result-body">Good news — this password has not appeared in any known data breach database. However, make sure you're also using a unique password for every site.</div>`;
+      document.getElementById('breachIcon').innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>';
+      document.getElementById('breachTitle').textContent = 'Not Found in Breaches';
+      document.getElementById('breachBody').textContent = 'Good news — this password was not found in the HaveIBeenPwned database. However, always ensure it meets strength requirements too.';
     }
   } catch(e) {
     res.className = 'breach-result error';
-    res.innerHTML = `<div class="breach-result-head"><div class="breach-result-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div><div class="breach-result-title">Check Unavailable</div></div><div class="breach-result-body">Could not connect to the breach database. Please check your internet connection and try again.</div>`;
+    document.getElementById('breachIcon').innerHTML = '⚠';
+    document.getElementById('breachTitle').textContent = 'Check Failed';
+    document.getElementById('breachBody').textContent = 'Could not reach the breach database. Please check your internet connection and try again.';
   }
 }
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 // AUTH
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 const users = {};
 let currentUser = null;
 let passRevealed = false;
@@ -1235,45 +1520,49 @@ function switchAuthTab(tab) {
   document.getElementById('atLogin').classList.toggle('active', tab==='login');
   document.getElementById('ap-register').classList.toggle('active', tab==='register');
   document.getElementById('ap-login').classList.toggle('active', tab==='login');
-  document.getElementById('regErr').style.display='none';
-  document.getElementById('loginErr').style.display='none';
+  document.getElementById('regErr').style.display = 'none';
+  document.getElementById('loginErr').style.display = 'none';
 }
+
 function showAuthErr(id, txtId, msg) {
   const el = document.getElementById(id);
   el.style.display = 'flex';
   document.getElementById(txtId).textContent = msg;
 }
+
 function doRegister() {
   const name = document.getElementById('rName').value.trim();
   const email = document.getElementById('rEmail').value.trim();
   const pass = document.getElementById('rPass').value;
-  document.getElementById('regErr').style.display='none';
+  document.getElementById('regErr').style.display = 'none';
   if (!name) return showAuthErr('regErr','regErrTxt','Please enter your full name.');
-  if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showAuthErr('regErr','regErrTxt','Enter a valid email address.');
-  if (pass.length<6) return showAuthErr('regErr','regErrTxt','Password must be at least 6 characters.');
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showAuthErr('regErr','regErrTxt','Enter a valid email address.');
+  if (pass.length < 6) return showAuthErr('regErr','regErrTxt','Password must be at least 6 characters.');
   if (users[email]) return showAuthErr('regErr','regErrTxt','This email is already registered.');
   miniAnalyze(pass);
   users[email] = { name, email, pass, strength: lastScore };
   currentUser = users[email];
   showDashboard();
 }
+
 function doLogin() {
   const email = document.getElementById('lEmail').value.trim();
   const pass = document.getElementById('lPass').value;
-  document.getElementById('loginErr').style.display='none';
+  document.getElementById('loginErr').style.display = 'none';
   if (!email) return showAuthErr('loginErr','loginErrTxt','Enter your email.');
   if (!pass) return showAuthErr('loginErr','loginErrTxt','Enter your password.');
   if (!users[email]) return showAuthErr('loginErr','loginErrTxt','No account found. Please register first.');
-  if (users[email].pass!==pass) return showAuthErr('loginErr','loginErrTxt','Incorrect password.');
+  if (users[email].pass !== pass) return showAuthErr('loginErr','loginErrTxt','Incorrect password.');
   currentUser = users[email];
   miniAnalyze(pass);
   currentUser.strength = lastScore;
   showDashboard();
 }
+
 function showDashboard() {
-  document.getElementById('authFormsWrap').style.display='none';
+  document.getElementById('authFormsWrap').style.display = 'none';
   const dw = document.getElementById('dashWrap');
-  dw.style.display='block';
+  dw.style.display = 'block';
   const u = currentUser;
   const s = u.strength;
   const level = scoreToLevel(s, u.pass.length);
@@ -1283,10 +1572,10 @@ function showDashboard() {
   document.getElementById('dAvatar').textContent = initials;
   document.getElementById('dName').textContent = u.name;
   document.getElementById('dEmail').textContent = u.email;
-  document.getElementById('dBadge').textContent = cfg.label;
+  document.getElementById('dBadge').textContent = '🔒 ' + cfg.label + ' Password';
   document.getElementById('dStatus').textContent = statusLabels[level];
   document.getElementById('dStatus').style.color = cfg.color;
-  document.getElementById('dReqs').textContent = `${s} / 6`;
+  document.getElementById('dReqs').textContent = s + ' / 6';
   document.getElementById('dReqs').style.color = cfg.color;
   const ent = calcEntropy(u.pass);
   document.getElementById('dEntropy').textContent = ent + ' bits';
@@ -1301,72 +1590,122 @@ function showDashboard() {
   document.getElementById('dPassVal').textContent = u.pass[0] + '•'.repeat(Math.max(u.pass.length-2,0)) + u.pass.slice(-1);
   document.getElementById('dRevealBtn').textContent = 'Show';
 }
+
 function toggleReveal() {
   passRevealed = !passRevealed;
   const u = currentUser;
-  document.getElementById('dPassVal').textContent = passRevealed ? u.pass : u.pass[0]+'•'.repeat(Math.max(u.pass.length-2,0))+u.pass.slice(-1);
+  document.getElementById('dPassVal').textContent = passRevealed
+    ? u.pass
+    : u.pass[0] + '•'.repeat(Math.max(u.pass.length-2,0)) + u.pass.slice(-1);
   document.getElementById('dRevealBtn').textContent = passRevealed ? 'Hide' : 'Show';
 }
+
 function doLogout() {
   currentUser = null;
-  document.getElementById('dashWrap').style.display='none';
-  document.getElementById('authFormsWrap').style.display='block';
-  ['rName','rEmail','rPass','lEmail','lPass'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('dashWrap').style.display = 'none';
+  document.getElementById('authFormsWrap').style.display = 'block';
+  ['rName','rEmail','rPass','lEmail','lPass'].forEach(id => document.getElementById(id).value='');
   miniAnalyze('');
   switchAuthTab('login');
 }
 
-// ──────────────────────────────────────
+// ══════════════════════════════════════
+// MINI METER (auth form)
+// ══════════════════════════════════════
+function miniAnalyze(p) {
+  let score = 0;
+  if (p.length >= 8) score++;
+  if (/[A-Z]/.test(p)) score++;
+  if (/[a-z]/.test(p)) score++;
+  if (/[0-9]/.test(p)) score++;
+  if (/[^a-zA-Z0-9]/.test(p)) score++;
+  if (p.length >= 12) score++;
+  lastScore = score;
+  const colors = ['var(--border2)','var(--red)','var(--orange)','var(--yellow)','var(--yellow)','#34d399','var(--green)'];
+  const labels = ['Enter password','Very Weak','Weak','Fair','Moderate','Good','Strong'];
+  for (let i = 1; i <= 4; i++) {
+    const bar = document.getElementById('mb' + i);
+    if (bar) bar.style.background = i <= Math.round(score * 4/6) ? colors[score] : 'var(--surface3)';
+  }
+  const lbl = document.getElementById('miniLabel');
+  const sc = document.getElementById('miniScore');
+  if (lbl) lbl.textContent = labels[score];
+  if (lbl) lbl.style.color = colors[score];
+  if (sc) sc.textContent = p.length > 0 ? score + '/6' : '';
+}
+
+// ══════════════════════════════════════
 // QUIZ
-// ──────────────────────────────────────
+// ══════════════════════════════════════
 const QUESTIONS = [
-  { q:"Which of these passwords is the strongest?", opts:["Password1!","p@ssw0rd","Xk$9#mLqR2vN","qwerty123"], ans:2, explain:"'Xk$9#mLqR2vN' is strongest — it's random, has 12 characters, and uses all character types. The others contain common patterns." },
-  { q:"What does 'password entropy' measure?", opts:["How old your password is","The unpredictability/randomness of a password","How many times a password has been used","The speed of password hashing"], ans:1, explain:"Entropy measures unpredictability — specifically, how many bits of information are needed to guess the password. Higher entropy = harder to crack." },
-  { q:"Why is reusing passwords across multiple sites dangerous?", opts:["It violates terms of service","If one site is breached, all your accounts are at risk","It slows down login","It makes passwords easier to forget"], ans:1, explain:"This is called 'credential stuffing'. Attackers take leaked username/password pairs and automatically try them on thousands of other sites." },
+  { q:"Which of these passwords is the strongest?", opts:["Password1!","p@ssw0rd","Xk$9#mLqR2vN","qwerty123"], ans:2, explain:"'Xk$9#mLqR2vN' is strongest — random, 12 characters, and uses all character types. The others contain predictable patterns." },
+  { q:"What does 'password entropy' measure?", opts:["How old your password is","The unpredictability and randomness of a password","How many times a password has been used","The speed of password hashing"], ans:1, explain:"Entropy measures unpredictability — how many bits of information are needed to guess the password. Higher entropy = harder to crack." },
+  { q:"Why is reusing passwords across multiple sites dangerous?", opts:["It violates terms of service","If one site is breached, all your accounts are at risk","It slows down login","It makes passwords easier to forget"], ans:1, explain:"This is called 'credential stuffing'. Attackers take leaked username/password pairs and try them on thousands of other sites automatically." },
   { q:"Which technique makes a password MUCH harder to crack by adding length?", opts:["Using a passphrase (multiple words)","Capitalizing the first letter","Adding '123' at the end","Using your birth year"], ans:0, explain:"A passphrase like 'correct-horse-battery-staple' is 28+ characters and extremely hard to crack — far better than short complex passwords." },
-  { q:"What is Two-Factor Authentication (2FA)?", opts:["Using two different passwords","A second verification step beyond your password","Changing your password twice a year","Having two accounts"], ans:1, explain:"2FA requires something you know (password) plus something you have (phone/authenticator app). Even if your password is stolen, attackers can't log in." },
-  { q:"Which hashing algorithm is recommended for storing passwords securely?", opts:["MD5","SHA-1","bcrypt","Base64"], ans:2, explain:"bcrypt is specifically designed for password hashing — it's intentionally slow and includes a 'salt' to prevent rainbow table attacks. MD5 and SHA-1 are cryptographically broken for this purpose." },
+  { q:"What is Two-Factor Authentication (2FA)?", opts:["Using two different passwords","A second verification step beyond your password","Changing your password twice a year","Having two accounts"], ans:1, explain:"2FA requires something you know (password) plus something you have (phone/authenticator). Even if your password is stolen, attackers can't log in." },
+  { q:"Which hashing algorithm is recommended for storing passwords securely?", opts:["MD5","SHA-1","bcrypt","Base64"], ans:2, explain:"bcrypt is designed specifically for password hashing — it's intentionally slow and includes a 'salt' to prevent rainbow table attacks. MD5 and SHA-1 are broken for this purpose." },
   { q:"What is a 'rainbow table' attack?", opts:["A brute force attack using colors","A precomputed table of password hashes used to reverse them","A network monitoring technique","A type of phishing email"], ans:1, explain:"Rainbow tables are massive precomputed lists of hash values. Salting passwords (adding random data before hashing) defeats rainbow table attacks entirely." },
-  { q:"How long should a good password be at minimum?", opts:["6 characters","8 characters","12 characters","Any length if it has symbols"], ans:2, explain:"Modern guidelines (NIST SP 800-63B) recommend at least 12 characters. Short passwords with symbols can still be cracked quickly with GPU hardware." },
+  { q:"How long should a good password be at minimum?", opts:["6 characters","8 characters","12 characters","Any length if it has symbols"], ans:2, explain:"NIST SP 800-63B recommends at least 12 characters. Short passwords with symbols can still be cracked quickly with GPU hardware." },
 ];
+
 let quizIdx = 0, quizScore = 0, quizAnswered = false;
+
 function renderQuiz() {
   const qw = document.getElementById('quizContent');
+  document.getElementById('quizProgLabel').textContent = quizIdx >= QUESTIONS.length ? '✓ Done' : (quizIdx + 1) + ' / ' + QUESTIONS.length;
+  document.getElementById('quizProgFill').style.width = (quizIdx / QUESTIONS.length * 100) + '%';
+
   if (quizIdx >= QUESTIONS.length) {
-    document.getElementById('quizProgFill').style.width = '100%';
-    const pct = Math.round(quizScore/QUESTIONS.length*100);
-    const grade = pct===100?'🏆 Perfect!':pct>=75?'🎉 Great job!':pct>=50?'👍 Good effort!':'📚 Keep learning!';
-    qw.innerHTML = `<div class="quiz-score"><div class="quiz-score-num">${quizScore}/${QUESTIONS.length}</div><div class="quiz-score-lbl">${grade} You got ${pct}% correct.</div><button class="quiz-restart" onclick="restartQuiz()">Try Again</button></div>`;
+    const pct = Math.round(quizScore / QUESTIONS.length * 100);
+    const grade = pct === 100 ? 'Perfect Score!' : pct >= 75 ? 'Great Job!' : pct >= 50 ? 'Good Effort!' : 'Keep Learning!';
+    const circumference = 2 * Math.PI * 40;
+    const dashOffset = circumference * (1 - quizScore / QUESTIONS.length);
+    qw.innerHTML = `
+      <div class="quiz-score">
+        <div class="quiz-score-ring">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--surface3)" stroke-width="8"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="var(--accent)" stroke-width="8"
+              stroke-dasharray="${circumference}" stroke-dashoffset="${dashOffset}"
+              style="transition:stroke-dashoffset 1s ease;stroke-linecap:round"/>
+          </svg>
+          <div class="quiz-score-inner">${quizScore}/${QUESTIONS.length}</div>
+        </div>
+        <div class="quiz-score-lbl">${grade} You scored ${pct}%</div>
+        <button class="quiz-restart" onclick="restartQuiz()">Try Again</button>
+      </div>`;
     return;
   }
+
   const q = QUESTIONS[quizIdx];
-  document.getElementById('quizProgFill').style.width = (quizIdx/QUESTIONS.length*100) + '%';
   qw.innerHTML = `
     <div class="quiz-q">Q${quizIdx+1}. ${q.q}</div>
     <div class="quiz-options">
-      ${q.opts.map((o,i)=>`<button class="quiz-opt" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+      ${q.opts.map((o,i) => `<button class="quiz-opt" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
     </div>
     <div class="quiz-explain" id="qExplain">${q.explain}</div>
     <button class="quiz-next" id="qNext" onclick="nextQuiz()">Next Question →</button>
   `;
   quizAnswered = false;
 }
+
 function answerQuiz(i) {
   if (quizAnswered) return;
   quizAnswered = true;
   const q = QUESTIONS[quizIdx];
   const opts = document.querySelectorAll('.quiz-opt');
-  opts.forEach((o,idx) => {
+  opts.forEach((o, idx) => {
     o.disabled = true;
-    if (idx===q.ans) o.classList.add('correct');
-    else if (idx===i) o.classList.add('wrong');
+    if (idx === q.ans) o.classList.add('correct');
+    else if (idx === i) o.classList.add('wrong');
   });
-  if (i===q.ans) quizScore++;
+  if (i === q.ans) quizScore++;
   document.getElementById('qExplain').style.display = 'block';
   document.getElementById('qNext').style.display = 'inline-block';
 }
+
 function nextQuiz() { quizIdx++; renderQuiz(); }
-function restartQuiz() { quizIdx=0; quizScore=0; quizAnswered=false; renderQuiz(); }
+function restartQuiz() { quizIdx = 0; quizScore = 0; quizAnswered = false; renderQuiz(); }
 renderQuiz();
 </script>
 </body>
