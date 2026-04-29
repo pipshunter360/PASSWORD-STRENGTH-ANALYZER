@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PassGuard Pro — Password Security Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04070f;--surface:#0c1220;--surface2:#111a2e;--surface3:#18243a;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#f0f5ff;--text2:#8fa3c8;--muted:#4a5a78;
+  --accent:#3b82f6;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;
+  --grad:linear-gradient(135deg,#3b82f6,#8b5cf6);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 50% at 20% 20%,rgba(59,130,246,.1),transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(139,92,246,.08),transparent 60%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(59,130,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.03) 1px,transparent 1px);background-size:60px 60px}
+section{position:relative;z-index:1}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 0;transition:all .3s}
+nav.scrolled{background:rgba(4,7,15,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-i{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.nlogo{display:flex;align-items:center;gap:9px;text-decoration:none;flex-shrink:0}
+.nlogo-icon{width:34px;height:34px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(59,130,246,.4);flex-shrink:0}
+.nlogo-icon svg{width:17px;height:17px}
+.nlogo-text{font-size:16px;font-weight:800;color:var(--text);letter-spacing:-.5px;white-space:nowrap}
+.nlogo-text span{color:var(--accent)}
+.npro{font-size:9px;background:var(--accent);color:#fff;padding:2px 5px;border-radius:3px;font-weight:700;margin-left:3px}
+.nlinks{display:flex;align-items:center;gap:22px}
+.nlinks a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:color .2s}
+.nlinks a:hover{color:var(--text)}
+.ncta{background:var(--accent);color:#fff;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 14px rgba(59,130,246,.35);white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:6px}
+.ncta:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(59,130,246,.5)}
+.mob-btn{display:none;background:none;border:1px solid var(--border2);border-radius:8px;padding:8px;color:var(--text);cursor:pointer;align-items:center;justify-content:center;flex-shrink:0}
+
+/* Mobile Drawer */
+.mob-drawer{position:fixed;inset:0;background:rgba(4,7,15,.98);z-index:300;display:none;flex-direction:column;padding:24px 20px;backdrop-filter:blur(20px)}
+.mob-drawer.open{display:flex}
+.mob-drawer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.mob-close{background:none;border:1px solid var(--border2);border-radius:8px;padding:8px;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mob-nav-links{display:flex;flex-direction:column;gap:2px;flex:1}
+.mob-nav-links a{font-size:18px;font-weight:600;color:var(--text2);text-decoration:none;padding:14px 10px;border-radius:10px;transition:all .2s;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.mob-nav-links a:last-child{border-bottom:none}
+.mob-nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04);padding-left:16px}
+.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--accent);color:#fff;padding:16px;border-radius:14px;font-size:16px;font-weight:700;text-decoration:none;margin-top:24px;box-shadow:0 6px 22px rgba(59,130,246,.4);transition:all .2s}
+.mob-cta:hover{background:#2563eb;transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:110px 20px 70px;max-width:1140px;margin:0 auto;gap:48px}
+.hero-left{flex:1;min-width:0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:#93c5fd;margin-bottom:22px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(36px,5vw,68px);font-weight:900;line-height:1.06;letter-spacing:-2px;margin-bottom:20px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-desc{font-size:16px;color:var(--text2);line-height:1.75;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.btn-primary{background:var(--accent);color:#fff;padding:13px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 6px 22px rgba(59,130,246,.4);display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(59,130,246,.5)}
+.btn-ghost{color:var(--text2);padding:13px 18px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid var(--border2);display:inline-flex;align-items:center;gap:8px}
+.btn-ghost:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.team-strip{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.team-avs{display:flex}
+.tav{width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;margin-left:-6px;flex-shrink:0}
+.tav:first-child{margin-left:0}
+.team-txt{font-size:12px;color:var(--text2)}
+.team-txt strong{color:var(--text)}
+
+/* DEMO CARD */
+.hero-right{flex:0 0 420px;min-width:0}
+.demo-card{background:var(--surface);border:1px solid var(--border2);border-radius:18px;padding:20px;box-shadow:0 40px 100px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.04);position:relative;overflow:hidden}
+.demo-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.5),transparent)}
+.demo-topbar{display:flex;align-items:center;gap:5px;margin-bottom:16px}
+.ddot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.dtitle{font-size:10px;color:var(--muted);margin-left:6px;font-family:'JetBrains Mono',monospace}
+.demo-inp{background:var(--surface2);border:1px solid var(--border2);border-radius:10px;padding:10px 12px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--text);letter-spacing:2px;display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;min-height:42px;gap:8px}
+.demo-inp-text{flex:1;word-break:break-all}
+.dcursor{display:inline-block;width:2px;height:13px;background:var(--accent);animation:blink .8s step-end infinite;vertical-align:middle;margin-left:1px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.dbars{display:flex;gap:4px;margin-bottom:8px}
+.dbar{flex:1;height:5px;border-radius:3px;background:var(--surface3);transition:all .4s}
+.dstr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.dstr-lbl{font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.dent{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.dchecks{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:11px}
+.dcheck{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);transition:color .3s}
+.dcheck.ok{color:var(--green)}
+.dchk{width:13px;height:13px;border-radius:50%;border:1.5px solid var(--surface3);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .3s}
+.dcheck.ok .dchk{background:var(--green);border-color:var(--green)}
+.dchk svg{display:none}.dcheck.ok .dchk svg{display:block}
+.dcrack{background:var(--surface2);border-radius:9px;padding:9px 12px;display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text2)}
+
+/* STATS */
+.stats{padding:50px 20px;max-width:1140px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-radius:14px;overflow:hidden;border:1px solid var(--border)}
+.sbox{background:var(--surface);padding:24px 16px;text-align:center}
+.snum{font-size:30px;font-weight:900;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.slbl{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.4}
+
+/* FEATURES */
+.features{padding:80px 20px;max-width:1140px;margin:0 auto}
+.eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent);margin-bottom:10px;font-family:'JetBrains Mono',monospace}
+.sec-title{font-size:clamp(26px,4vw,44px);font-weight:900;letter-spacing:-1.5px;margin-bottom:12px;line-height:1.1}
+.sec-sub{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:44px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:18px;overflow:hidden;border:1px solid var(--border)}
+.fcard{background:var(--surface);padding:26px;transition:background .2s;cursor:default}
+.fcard:hover{background:var(--surface2)}
+.ficon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;flex-shrink:0}
+.ficon svg{width:20px;height:20px}
+.ftitle{font-size:15px;font-weight:700;margin-bottom:7px;letter-spacing:-.3px}
+.fdesc{font-size:12px;color:var(--text2);line-height:1.7}
+.ftag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-top:10px;font-family:'JetBrains Mono',monospace}
+
+/* HOW */
+.how{padding:80px 20px;max-width:1140px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+.steps::before{content:'';position:absolute;top:30px;left:calc(16.7% + 20px);right:calc(16.7% + 20px);height:1px;background:linear-gradient(90deg,var(--accent),rgba(59,130,246,.1),var(--accent));opacity:.3}
+.step{text-align:center;padding:22px 14px}
+.step-num{width:58px;height:58px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px;font-weight:900;color:#fff;box-shadow:0 0 28px rgba(59,130,246,.22)}
+.step-title{font-size:15px;font-weight:700;margin-bottom:7px;letter-spacing:-.3px}
+.step-desc{font-size:12px;color:var(--text2);line-height:1.7}
+
+/* TESTIMONIALS */
+.testi{padding:80px 20px;max-width:1140px;margin:0 auto}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .2s}
+.tcard:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.tstars{display:flex;gap:2px;margin-bottom:10px}
+.tstars svg{color:var(--yellow)}
+.ttext{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:14px;font-style:italic}
+.tauthor{display:flex;align-items:center;gap:9px}
+.tav2{width:32px;height:32px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.tname{font-size:12px;font-weight:700}
+.trole{font-size:11px;color:var(--muted)}
+
+/* CTA */
+.cta{padding:80px 20px;max-width:1140px;margin:0 auto}
+.cta-box{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:52px 32px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(59,130,246,.07),transparent)}
+.cta-title{font-size:clamp(26px,4vw,46px);font-weight:900;letter-spacing:-1.5px;margin-bottom:12px;line-height:1.1}
+.cta-sub{font-size:15px;color:var(--text2);margin-bottom:28px}
+.cta-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 20px}
+.footer-i{max-width:1140px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.flogo{font-size:15px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.flogo span{color:var(--accent)}
+.finfo{font-size:11px;color:var(--muted);line-height:1.9}
+.flinks{display:flex;gap:18px;align-items:center}
+.flinks a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--text2)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:1000px){
+  .hero{flex-direction:column;padding:100px 20px 60px;gap:40px;min-height:auto}
+  .hero-left{text-align:center}
+  .hero-badge{margin:0 auto 22px}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-btns{justify-content:center}
+  .team-strip{justify-content:center}
+  .hero-right{flex:none;width:100%;max-width:480px;margin:0 auto}
+  .nlinks{display:none}
+  .mob-btn{display:flex}
+}
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr;gap:16px}
+  .steps::before{display:none}
+  .tgrid{grid-template-columns:1fr}
+  .cta-box{padding:36px 20px}
+  .footer-i{flex-direction:column;align-items:center;text-align:center}
+  .flinks{justify-content:center}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  h1{letter-spacing:-1px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-primary,.btn-ghost{width:100%;justify-content:center}
+  .cta-btns{flex-direction:column;align-items:stretch}
+  .cta-btns a{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<div class="bg-grid"></div>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-drawer-top">
+    <div class="nlogo">
+      <div class="nlogo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1.5" fill="#fff" stroke="none"/></svg></div>
+      <span class="nlogo-text">Pass<span>Guard</span><span class="npro">PRO</span></span>
+    </div>
+    <button class="mob-close" onclick="closeMob()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+  <div class="mob-nav-links">
+    <a href="#features" onclick="closeMob()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Features
+    </a>
+    <a href="#how" onclick="closeMob()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      How It Works
+    </a>
+    <a href="#testimonials" onclick="closeMob()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Reviews
+    </a>
+  </div>
+  <a class="mob-cta" href="app.html">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Launch PassGuard Pro
+  </a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-i">
+    <a class="nlogo" href="index.html">
+      <div class="nlogo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1.5" fill="#fff" stroke="none"/></svg></div>
+      <span class="nlogo-text">Pass<span>Guard</span><span class="npro">PRO</span></span>
+    </a>
+    <div class="nlinks">
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+      <a href="#testimonials">Reviews</a>
+    </div>
+    <a class="ncta" href="app.html">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Launch App
+    </a>
+    <button class="mob-btn" onclick="openMob()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section>
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><span class="dot"></span>Live breach detection · Zero data collected</div>
+    <h1>Your passwords<br>deserve <span class="grad-text">real security</span></h1>
+    <p class="hero-desc">PassGuard Pro analyzes password strength in real time, checks against 10 billion known breaches, generates uncrackable passwords, and keeps everything in your browser — nothing is ever sent to a server.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="app.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Analyze My Password
+      </a>
+      <a class="btn-ghost" href="#features">See All Features</a>
+    </div>
+    <div class="team-strip">
+      <div class="team-avs">
+        <div class="tav">IA</div>
+        <div class="tav" style="background:linear-gradient(135deg,#10b981,#059669)">RA</div>
+        <div class="tav" style="background:linear-gradient(135deg,#f59e0b,#d97706)">AA</div>
+        <div class="tav" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed)">MB</div>
+        <div class="tav" style="background:linear-gradient(135deg,#ef4444,#dc2626)">EF</div>
+      </div>
+      <div class="team-txt">Built by <strong>5 CS students</strong> at NSUK · NS-CSC 219</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="demo-card">
+      <div class="demo-topbar">
+        <div class="ddot" style="background:#ff5f57"></div>
+        <div class="ddot" style="background:#febc2e"></div>
+        <div class="ddot" style="background:#28c840"></div>
+        <span class="dtitle">passguard-analyzer · live demo</span>
+      </div>
+      <div class="demo-inp">
+        <span class="demo-inp-text"><span id="dPass"></span><span class="dcursor"></span></span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <div class="dbars"><div class="dbar" id="db1"></div><div class="dbar" id="db2"></div><div class="dbar" id="db3"></div><div class="dbar" id="db4"></div></div>
+      <div class="dstr">
+        <span class="dstr-lbl" id="dLbl" style="color:var(--muted)">Analyzing…</span>
+        <span class="dent" id="dEnt">0.0 bits</span>
+      </div>
+      <div class="dchecks">
+        <div class="dcheck" id="dc1"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>8+ chars</div>
+        <div class="dcheck" id="dc2"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Uppercase</div>
+        <div class="dcheck" id="dc3"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Number</div>
+        <div class="dcheck" id="dc4"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Symbol</div>
+        <div class="dcheck" id="dc5"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>12+ chars</div>
+        <div class="dcheck" id="dc6"><div class="dchk"><svg width="7" height="7" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="1,6 4,9 11,2"/></svg></div>Not common</div>
+      </div>
+      <div class="dcrack">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Crack time: <strong id="dCrack" style="color:var(--accent)">calculating…</strong></span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- STATS -->
+<section>
+<div class="stats rv">
+  <div class="stats-grid">
+    <div class="sbox"><div class="snum">10B+</div><div class="slbl">Breach records checked</div></div>
+    <div class="sbox"><div class="snum">8</div><div class="slbl">Security checks per password</div></div>
+    <div class="sbox"><div class="snum">4</div><div class="slbl">Generator modes</div></div>
+    <div class="sbox"><div class="snum">0</div><div class="slbl">Bytes sent to any server</div></div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+<div class="features">
+  <div class="rv">
+    <div class="eyebrow">Features</div>
+    <h2 class="sec-title">Everything you need to stay <span class="grad-text">secure</span></h2>
+    <p class="sec-sub">PassGuard Pro goes beyond simple strength meters — it's a complete password intelligence suite built with real security standards.</p>
+  </div>
+  <div class="feat-grid rv">
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(59,130,246,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="ftitle">Real-Time Analyzer</div>
+      <div class="fdesc">Evaluates your password against 8 security rules with entropy scoring, pattern detection, character breakdown, and visual strength meter — all as you type.</div>
+      <span class="ftag" style="background:rgba(59,130,246,.1);color:#60a5fa">Core</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(239,68,68,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <div class="ftitle">Live Breach Detection</div>
+      <div class="fdesc">Checks against the HaveIBeenPwned database of 10+ billion compromised passwords. Your actual password is never transmitted — only an anonymous hash prefix.</div>
+      <span class="ftag" style="background:rgba(239,68,68,.1);color:#f87171">Security</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(16,185,129,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+      </div>
+      <div class="ftitle">Password Generator</div>
+      <div class="fdesc">Four modes: Random characters, memorable Passphrases, Pronounceable passwords, and PIN codes. Full customization with live strength preview.</div>
+      <span class="ftag" style="background:rgba(16,185,129,.1);color:#34d399">Generator</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(245,158,11,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="ftitle">Crack Time Estimator</div>
+      <div class="fdesc">Calculates how long your password would survive a brute-force attack at 10 billion guesses per second — from "Instant" to "Millions of years".</div>
+      <span class="ftag" style="background:rgba(245,158,11,.1);color:#fbbf24">Analysis</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(139,92,246,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+      </div>
+      <div class="ftitle">Password Vault</div>
+      <div class="fdesc">Save and organize passwords with custom labels. View strength scores and crack times, copy with one click, and export your entire vault as a CSV file.</div>
+      <span class="ftag" style="background:rgba(139,92,246,.1);color:#a78bfa">Storage</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(6,182,212,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="ftitle">Character Breakdown Chart</div>
+      <div class="fdesc">Interactive pie chart showing the exact composition — uppercase, lowercase, numbers, symbols — with live percentages updating as you type.</div>
+      <span class="ftag" style="background:rgba(6,182,212,.1);color:#22d3ee">Visual</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(59,130,246,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <div class="ftitle">Health Score Dashboard</div>
+      <div class="fdesc">An overall 0–100 security ring score calculated from all vault passwords, with personalized recommendations and a full activity log.</div>
+      <span class="ftag" style="background:rgba(59,130,246,.1);color:#60a5fa">Dashboard</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(236,72,153,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M12 3c-4.97 0-9 3.58-9 8s4.03 8 9 8h.5l4.5 4v-4.09C19.24 17.72 21 15 21 11c0-4.42-4.03-8-9-8z"/></svg>
+      </div>
+      <div class="ftitle">Security Quiz</div>
+      <div class="fdesc">An interactive 5-question quiz that tests your cybersecurity knowledge with instant feedback, explanations, and a final score card.</div>
+      <span class="ftag" style="background:rgba(236,72,153,.1);color:#f472b6">Education</span>
+    </div>
+
+    <div class="fcard">
+      <div class="ficon" style="background:rgba(16,185,129,.12)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+      <div class="ftitle">Security Tips Library</div>
+      <div class="fdesc">10 rotating expert security tips plus a full tips library covering password hygiene, 2FA, phishing awareness, and smart secure browsing.</div>
+      <span class="ftag" style="background:rgba(16,185,129,.1);color:#34d399">Education</span>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+<div class="how">
+  <div class="rv" style="text-align:center;margin-bottom:50px">
+    <div class="eyebrow">How It Works</div>
+    <h2 class="sec-title">Three steps to <span class="grad-text">password safety</span></h2>
+  </div>
+  <div class="steps rv">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Enter Your Password</div>
+      <div class="step-desc">Type any password into the analyzer. No data is stored or transmitted — everything runs locally in your browser using modern JavaScript.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Get Deep Analysis</div>
+      <div class="step-desc">Receive real-time feedback: strength score, entropy bits, crack time, pattern warnings, breach status, character breakdown, and improvement suggestions.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Generate & Save</div>
+      <div class="step-desc">Use the built-in generator to create a stronger replacement. Save it to your vault with a label, then export everything as a CSV for safekeeping.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+<div class="testi">
+  <div class="rv" style="text-align:center;margin-bottom:44px">
+    <div class="eyebrow">Testimonials</div>
+    <h2 class="sec-title">What users are <span class="grad-text">saying</span></h2>
+  </div>
+  <div class="tgrid rv">
+    <div class="tcard">
+      <div class="tstars">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="ttext">"I thought 'Password1!' was strong. PassGuard showed me it would be cracked in 2 hours. Now I actually understand what makes a password truly secure."</div>
+      <div class="tauthor"><div class="tav2">AM</div><div><div class="tname">Amaka M.</div><div class="trole">CS Student, NSUK</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tstars">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="ttext">"The breach detection is what sets this apart. Knowing my password appeared in 47,000 breaches made me change it immediately. This is genuinely useful."</div>
+      <div class="tauthor"><div class="tav2" style="background:linear-gradient(135deg,#10b981,#059669)">KO</div><div><div class="tname">Kingsley O.</div><div class="trole">Software Developer</div></div></div>
+    </div>
+    <div class="tcard">
+      <div class="tstars">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="ttext">"The passphrase generator gave me 'Ember-Frost-Lunar42' — strong, memorable, and would take millions of years to crack. Absolutely brilliant tool."</div>
+      <div class="tauthor"><div class="tav2" style="background:linear-gradient(135deg,#f59e0b,#d97706)">FN</div><div><div class="tname">Fatima N.</div><div class="trole">Cybersecurity Enthusiast</div></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CTA -->
+<section>
+<div class="cta rv">
+  <div class="cta-box">
+    <div class="eyebrow" style="margin-bottom:12px">Get Started Free</div>
+    <h2 class="cta-title">Ready to secure your <span class="grad-text">passwords?</span></h2>
+    <p class="cta-sub">No signup required. No data collected. 100% free. Open the app and start analyzing in seconds.</p>
+    <div class="cta-btns">
+      <a class="btn-primary" href="app.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Launch PassGuard Pro
+      </a>
+      <a class="btn-ghost" href="#features">Learn More</a>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-i">
+    <div>
+      <div class="flogo">Pass<span>Guard</span> Pro</div>
+      <div class="finfo">NS-CSC 219 · Department of Computer Science<br>Nasarawa State University, Keffi (NSUK)</div>
+    </div>
+    <div class="finfo" style="text-align:center">
+      INUSA Sunusi Ali · RAJI Abubakar Bakari · ANDREW Abraham Akoza<br>
+      MUSA Bashiru · EZEKIEL Favour Luba<br>
+      Supervisor: Dr. A. S. Abdullahi
+    </div>
+    <div class="flinks">
+      <a href="app.html">App</a>
+      <a href="#features">Features</a>
+      <a href="#how">How It Works</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
+
+// MOBILE DRAWER
+function openMob(){document.getElementById('mobDrawer').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mobDrawer').classList.remove('open');document.body.style.overflow=''}
+
+// SCROLL REVEAL
+document.querySelectorAll('.rv').forEach(el=>{
+  new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');}),{threshold:.1}).observe(el);
+});
+
+// DEMO ANIMATION
+const seqs=[
+  {p:'pass',lvl:1,bits:18.8,crack:'3 minutes',checks:[false,false,false,false,false,false]},
+  {p:'Password',lvl:1,bits:45.6,crack:'2 days',checks:[true,true,false,false,false,true]},
+  {p:'Password1',lvl:2,bits:53.6,crack:'3 weeks',checks:[true,true,true,false,false,true]},
+  {p:'P@ssword1!',lvl:2,bits:66.2,crack:'14 months',checks:[true,true,true,true,false,false]},
+  {p:'MyS3cur3P@ss!2024',lvl:4,bits:112.4,crack:'millions of years',checks:[true,true,true,true,true,true]},
+];
+const sC=['','#ef4444','#f59e0b','#3b82f6','#10b981'];
+const sL=['','Weak','Fair','Good','Strong'];
+let si=0;
+function runSeq(){
+  const s=seqs[si];let i=0;
+  document.getElementById('dPass').textContent='';
+  const t=setInterval(()=>{
+    if(i<s.p.length){document.getElementById('dPass').textContent+='•';i++;}
+    else{
+      clearInterval(t);
+      const c=sC[s.lvl];
+      for(let b=1;b<=4;b++){const el=document.getElementById('db'+b);el.style.background=b<=s.lvl?c:'var(--surface3)';el.style.boxShadow=b<=s.lvl?`0 0 6px ${c}55`:'';}
+      document.getElementById('dLbl').textContent=sL[s.lvl];document.getElementById('dLbl').style.color=c;
+      document.getElementById('dEnt').textContent=`${s.bits} bits`;
+      document.getElementById('dCrack').textContent=s.crack;document.getElementById('dCrack').style.color=s.lvl>=4?'#10b981':s.lvl>=3?'#3b82f6':'#f59e0b';
+      s.checks.forEach((m,idx)=>document.getElementById('dc'+(idx+1)).classList.toggle('ok',m));
+      setTimeout(()=>{si=(si+1)%seqs.length;runSeq();},3200);
+    }
+  },75);
+}
+runSeq();
+</script>
+</body>
+</html>
